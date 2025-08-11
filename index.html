@@ -14,8 +14,7 @@
   margin-bottom: 20px;
   padding: 15px;
   background: white;
-  border-radius: 8px;
- box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 /* Step Header Styles */
 .step-header {
@@ -34,7 +33,6 @@
   max-width: 100%;
   height: auto;
   border-radius: 8px;
- /* box-shadow: 0 2px 8px rgba(0,0,0,0.1); */
   transition: all 0.3s ease;
 }
 .logo:hover {
@@ -466,14 +464,14 @@ h1 { text-align: center; color: #333; }
   
   <!-- Court Selection Section -->
 <div class="section">
-  <div class="step-header">Step 1: Select courts in priority order</div>
+  <div class="step-header">Step 1: Select available courts</div>
      
-    <h4>Available Courts</h4>
+    <h4>Selected Courts</h4>
     <div id="availableCourts" class="available-courts">
       <em style="color: #666;">Click or Drag courts here in the order they will be used</em>
     </div>
     
-    <h4>Court Pool:</h4>
+    <h4>Unselected Courts:</h4>
     <div id="courtPool" class="court-pool"></div>
     
     <button id="clearCourts" class="secondary">Clear All Courts</button>
@@ -631,6 +629,18 @@ function scrollToElement(elementId) {
       behavior: 'smooth', 
       block: 'start' 
     });
+  }
+}
+
+// Grade translation function - converts numeric grades to club format
+function translateGrade(numericGrade) {
+  switch(numericGrade) {
+    case 5: return '2';
+    case 4: return '2A';
+    case 3: return '2B';
+    case 2: return '3';
+    case 1: return '3B';
+    default: return numericGrade; // fallback for any unexpected values
   }
 }
 
@@ -1164,23 +1174,27 @@ function hideSuggestions(rowIndex) {
 
 function updateSitOffCalculation() {
   const activePlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting);
+  const soPlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting && p.so);
   const totalActivePlayers = activePlayers.length;
-  const sitOffCount = totalActivePlayers % 4;
+  const totalNeededToSitOff = totalActivePlayers % 4;
+  const alreadySelectedToSitOff = soPlayers.length;
+  const remainingToSelect = Math.max(0, totalNeededToSitOff - alreadySelectedToSitOff);
   
   const sitOffElement = document.getElementById('sitOffCount');
   const calculatorElement = document.getElementById('sitOffCalculator');
   
-  sitOffElement.textContent = sitOffCount;
+  sitOffElement.textContent = remainingToSelect;
   
-  // Update styling based on sit-off count
+  // Update styling based on remaining count
   calculatorElement.className = 'sit-off-calculator';
-  if (sitOffCount === 0) {
+  if (totalNeededToSitOff === 0) {
     calculatorElement.classList.add('sit-off-good');
-  } else if (sitOffCount === 3) {
-    calculatorElement.classList.add('sit-off-bad');
+  } else if (remainingToSelect === 0) {
+    calculatorElement.classList.add('sit-off-good');
+  } else {
+    // Keep default styling when players still need to be selected
   }
 }
-
 function updateProceedButton() {
  const activePlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting);
 const soPlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting && p.so);
@@ -1333,7 +1347,7 @@ function setupManualMatchInterface(data) {
   allPlayers.forEach(player => {
     const playerDiv = document.createElement('div');
     playerDiv.className = 'manual-player-item';
-    playerDiv.innerHTML = `${player.name} (${player.grade}, ${player.gender})`;
+    playerDiv.innerHTML = `${player.name} (${translateGrade(player.grade)})`;
     playerDiv.dataset.playerName = player.name;
     playerDiv.dataset.playerGrade = player.grade;
     playerDiv.dataset.playerGender = player.gender;
@@ -1396,11 +1410,11 @@ function updateTeamDisplay() {
   const team2Div = document.getElementById('team2Players');
   
   team1Div.innerHTML = manualTeam1.map(p => 
-    `<div class="team-player">${p.name} (${p.grade}, ${p.gender})</div>`
+`<div class="team-player">${p.name} (${translateGrade(p.grade)}, ${p.gender})</div>`
   ).join('');
   
   team2Div.innerHTML = manualTeam2.map(p => 
-    `<div class="team-player">${p.name} (${p.grade}, ${p.gender})</div>`
+    `<div class="team-player">${p.name} (${translateGrade(p.grade)}, ${p.gender})</div>`
   ).join('');
   
   // Update team slot styling
@@ -1636,11 +1650,13 @@ function processMatches() {
   // NEW: Final competitiveness optimization
   const competitiveMatches = fixUncompetitiveMatches(sortedData, optimizedMatches);
 
-  currentData = sortedData;
-  currentMatches = competitiveMatches;
-  displayResults(sortedData, competitiveMatches);
-}
+  // NEW: Final individual match balancing
+  const finalBalancedMatches = balanceIndividualMatches(sortedData, competitiveMatches);
 
+  currentData = sortedData;
+  currentMatches = finalBalancedMatches;
+  displayResults(sortedData, finalBalancedMatches);
+}
 // New function for processing with adjusted data (after manual matches)
 
 function processMatchesWithAdjustedData(adjustedData) {
@@ -1652,12 +1668,15 @@ function processMatchesWithAdjustedData(adjustedData) {
   const finalMatches = processCourtPreferences(sortedData, balancedMatches);
   const optimizedMatches = autoFixRepeatPartnerships(sortedData, finalMatches);
 
-  // NEW: Final competitiveness optimization
+ // NEW: Final competitiveness optimization
   const competitiveMatches = fixUncompetitiveMatches(sortedData, optimizedMatches);
 
-  currentMatches = competitiveMatches;
+  // NEW: Final individual match balancing  
+  const individuallyBalancedMatches = balanceIndividualMatches(sortedData, competitiveMatches);
+
+  currentMatches = individuallyBalancedMatches;
   // Use original currentData for display/export, but show generated matches
-  displayResults(currentData, competitiveMatches);
+  displayResults(currentData, individuallyBalancedMatches);
 }
 function sortPlayers(data) {
   const sortedMen = data.availableMen.sort((a, b) => b.grade - a.grade);
@@ -1780,7 +1799,28 @@ function formMixedDoublesMatches(data) {
   for (let targetGrade = 5; targetGrade >= 1; targetGrade--) {
     log("=== PROCESSING GRADE " + targetGrade + " ===");
     
-   // Normal in-grade processing first
+    // ENHANCED: Check for cross-grade balancing opportunity first
+const unassignedMen = data.sortedMen.filter(p => p.grade === targetGrade && !assigned.has(p.name));
+const unassignedWomen = data.sortedWomen.filter(p => p.grade === targetGrade && !assigned.has(p.name));
+const lowerMen = data.sortedMen.filter(p => p.grade === (targetGrade - 1) && !assigned.has(p.name));
+const lowerWomen = data.sortedWomen.filter(p => p.grade === (targetGrade - 1) && !assigned.has(p.name));
+
+// If we have exactly 1M+1W of current grade and 1M+1W of lower grade, create balanced match
+if (unassignedMen.length === 1 && unassignedWomen.length === 1 && 
+    lowerMen.length >= 1 && lowerWomen.length >= 1) {
+  const match = createMatch(
+    [unassignedMen[0], lowerWomen[0]],
+    [lowerMen[0], unassignedWomen[0]],
+    "Mixed Doubles",
+    "Cross-grade balanced"
+  );
+  if (match) {
+    matches.push(match);
+    continue; // Process next grade
+  }
+}
+
+// Normal in-grade processing
 while (true) {
   const currentMen = data.sortedMen.filter(p => p.grade === targetGrade && !assigned.has(p.name));
   const currentWomen = data.sortedWomen.filter(p => p.grade === targetGrade && !assigned.has(p.name));
@@ -1795,27 +1835,6 @@ while (true) {
     if (match) matches.push(match);
   } else {
     break;
-  }
-}
-
-// ENHANCED: Check for cross-grade balancing opportunity AFTER in-grade processing
-const remainingMen = data.sortedMen.filter(p => p.grade === targetGrade && !assigned.has(p.name));
-const remainingWomen = data.sortedWomen.filter(p => p.grade === targetGrade && !assigned.has(p.name));
-const lowerMen = data.sortedMen.filter(p => p.grade === (targetGrade - 1) && !assigned.has(p.name));
-const lowerWomen = data.sortedWomen.filter(p => p.grade === (targetGrade - 1) && !assigned.has(p.name));
-
-// If we have exactly 1M+1W of current grade and 1M+1W of lower grade, create balanced match
-if (remainingMen.length === 1 && remainingWomen.length === 1 && 
-    lowerMen.length >= 1 && lowerWomen.length >= 1) {
-  const match = createMatch(
-    [remainingMen[0], lowerWomen[0]],
-    [lowerMen[0], remainingWomen[0]],
-    "Mixed Doubles",
-    "Cross-grade balanced"
-  );
-  if (match) {
-    matches.push(match);
-    continue; // Process next grade
   }
 }
 
@@ -2442,10 +2461,16 @@ function autoFixRepeatPartnerships(data, matches) {
   
   log("Found " + repeatPartners.length + " repeat partnerships to attempt fixing");
   
+  // Limit to fixing the first 10 repeat partnerships to prevent exponential blowup
+  const maxFixes = Math.min(10, repeatPartners.length);
+  if (maxFixes < repeatPartners.length) {
+    log("Limiting auto-fixes to first " + maxFixes + " partnerships for performance");
+  }
+  
   // PHASE 1: Try simple intra-match swaps first (especially for same-sex matches)
   log("=== PHASE 1: INTRA-MATCH FIXES ===");
   
-  repeatPartners.forEach((repeat, repeatIndex) => {
+  repeatPartners.slice(0, maxFixes).forEach((repeat, repeatIndex) => {
     const matchIndex = repeat.matchIndex;
     const teamNum = parseInt(repeat.team);
     const match = workingMatches[matchIndex];
@@ -2512,7 +2537,7 @@ function autoFixRepeatPartnerships(data, matches) {
   const setFormatPreference = data.setFormatPreference;
   
   // Process remaining repeat partnerships with original complex logic
-  remainingRepeats.forEach((repeat, repeatIndex) => {
+  remainingRepeats.slice(0, maxFixes).forEach((repeat, repeatIndex) => {
     const matchIndex = repeat.matchIndex;
     const teamNum = parseInt(repeat.team);
     const match = workingMatches[matchIndex];
@@ -2697,6 +2722,69 @@ function fixUncompetitiveMatches(data, matches) {
   return matches;
 }
 
+function balanceIndividualMatches(data, matches) {
+  log("=== FINAL INDIVIDUAL MATCH BALANCING ===");
+  
+  let totalImprovedMatches = 0;
+  
+  matches.forEach((match, matchIndex) => {
+    // Check if match needs balancing (≥2 point gap)
+    const team1Total = match.team1.reduce((sum, p) => sum + p.grade, 0);
+    const team2Total = match.team2.reduce((sum, p) => sum + p.grade, 0);
+    const currentGap = Math.abs(team1Total - team2Total);
+    
+    if (currentGap < 2) return; // Skip well-balanced matches
+    
+    log(`Match ${matchIndex} needs balancing: ${team1Total} vs ${team2Total} (gap=${currentGap})`);
+    
+    // Test all 3 possible swaps
+    let bestSwap = null;
+    let bestGap = currentGap;
+    
+    for (let t1Player = 0; t1Player < 2; t1Player++) {
+      for (let t2Player = 0; t2Player < 2; t2Player++) {
+        if (t1Player === 1 && t2Player === 1) continue; // Skip redundant swap
+        
+        // Test this swap
+        const testMatch = JSON.parse(JSON.stringify(match));
+        const tempPlayer = testMatch.team1[t1Player];
+        testMatch.team1[t1Player] = testMatch.team2[t2Player];
+        testMatch.team2[t2Player] = tempPlayer;
+        
+        // Check if creates 2M vs 2F
+        if (creates2Mvs2F(testMatch, data)) continue;
+        
+        // Calculate new balance
+        const newTeam1Total = testMatch.team1.reduce((sum, p) => sum + p.grade, 0);
+        const newTeam2Total = testMatch.team2.reduce((sum, p) => sum + p.grade, 0);
+        const newGap = Math.abs(newTeam1Total - newTeam2Total);
+        
+        // Keep if it's the best improvement so far
+        if (newGap < bestGap) {
+          bestGap = newGap;
+          bestSwap = { t1Player, t2Player };
+        }
+      }
+    }
+    
+    // Apply the best swap if found
+    if (bestSwap) {
+      const tempPlayer = match.team1[bestSwap.t1Player];
+      match.team1[bestSwap.t1Player] = match.team2[bestSwap.t2Player];
+      match.team2[bestSwap.t2Player] = tempPlayer;
+      
+      updateMatchFormat(match);
+      log(`  ✓ Swapped players: Gap reduced from ${currentGap} to ${bestGap}`);
+      totalImprovedMatches++;
+    } else {
+      log(`  No valid improvement found for match ${matchIndex}`);
+    }
+  });
+  
+  log(`=== INDIVIDUAL MATCH BALANCING COMPLETE: ${totalImprovedMatches} matches improved ===`);
+  return matches;
+}
+
 function isUncompetitive(match) {
   const team1Grades = match.team1.map(p => p.grade).sort((a,b) => b-a); // [high, low]
   const team2Grades = match.team2.map(p => p.grade).sort((a,b) => b-a); // [high, low]
@@ -2789,9 +2877,9 @@ function attemptCompetitivenessSwap(data, matches, matchAIndex, matchBIndex) {
 
 function creates2Mvs2F(match, data) {
   const team1Men = match.team1.filter(p => getPlayerGender(p.name, data) === 'M').length;
-  const team1Women = match.team1.filter(p => getPlayerGender(p.name, data) === 'W').length;
+  const team1Women = match.team1.filter(p => getPlayerGender(p.name, data) === 'F').length;
   const team2Men = match.team2.filter(p => getPlayerGender(p.name, data) === 'M').length;
-  const team2Women = match.team2.filter(p => getPlayerGender(p.name, data) === 'W').length;
+  const team2Women = match.team2.filter(p => getPlayerGender(p.name, data) === 'F').length;
   
   // Check for 2M vs 2F pattern
   return (team1Men === 2 && team1Women === 0 && team2Men === 0 && team2Women === 2) ||
@@ -2954,7 +3042,7 @@ const satOffPlayers = playerRows.filter(p => p.name && p.so).map(p => p.name);
       matchHtml += '<div class="player-box' + nhcClass + repeatClass + manualClass + '" draggable="true" ';
       matchHtml += 'data-type="player" data-match="' + matchIndex + '" data-team="1" data-player="' + playerIndex + '" ';
       matchHtml += 'data-name="' + player.name + '" data-grade="' + player.grade + '">';
-      matchHtml += player.name + ' (' + player.grade + ')</div>';
+      matchHtml += player.name + ' (' + translateGrade(player.grade) + ')</div>';
     });
     matchHtml += '</div>';
     
@@ -2972,7 +3060,7 @@ const satOffPlayers = playerRows.filter(p => p.name && p.so).map(p => p.name);
       matchHtml += '<div class="player-box' + nhcClass + repeatClass + manualClass + '" draggable="true" ';
       matchHtml += 'data-type="player" data-match="' + matchIndex + '" data-team="2" data-player="' + playerIndex + '" ';
       matchHtml += 'data-name="' + player.name + '" data-grade="' + player.grade + '">';
-      matchHtml += player.name + ' (' + player.grade + ')</div>';
+      matchHtml += player.name + ' (' + translateGrade(player.grade) + ')</div>';
     });
     matchHtml += '</div>';
     
@@ -3302,8 +3390,8 @@ function printMatchSheet(data, matches) {
     }
 
     matches.forEach((match, index) => {
-      const team1Str = match.team1.map(p => `${p.name} (${p.grade})`).join(', ');
-      const team2Str = match.team2.map(p => `${p.name} (${p.grade})`).join(', ');
+      const team1Str = match.team1.map(p => `${p.name} (${translateGrade(p.grade)})`).join(', ');
+const team2Str = match.team2.map(p => `${p.name} (${translateGrade(p.grade)})`).join(', ');
       const isManual = match.isManual || false;
       
       printHTML += `
@@ -3394,8 +3482,8 @@ function createSingleSetSheet(wb, data, matches, setNumber, satOffPlayers = []) 
     // Add match data if we have a match for this row
     if (i < matches.length) {
       const match = matches[i];
-      const team1Str = match.team1.map(p => p.name + ' (' + p.grade + ')').join(', ');
-      const team2Str = match.team2.map(p => p.name + ' (' + p.grade + ')').join(', ');
+     const team1Str = match.team1.map(p => `${p.name} (${translateGrade(p.grade)})`).join(', ');
+const team2Str = match.team2.map(p => `${p.name} (${translateGrade(p.grade)})`).join(', ');
       const satOffPlayer = i < satOffPlayers.length ? satOffPlayers[i] : '';
       const matchType = match.isManual ? 'Manual' : 'Auto';
       
