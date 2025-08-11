@@ -493,10 +493,15 @@ h1 { text-align: center; color: #333; }
 </head>
 <body>
   <!-- Logo Section -->
-<div class="logo-section">
+<!-- Logo Section -->
+<!-- Logo Section -->
+<div class="logo-section" style="position: relative;">
   <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
     <img src="CTClogo.jpg" alt="Tennis Club Logo" class="logo">
     <h1 style="margin: 0; color: #333;">Social Tennis Match Maker</h1>
+  </div>
+  <div style="position: absolute; bottom: 10px; right: 15px; font-size: 11px; color: #999;">
+    © 2025 Paul Oen. All rights reserved.
   </div>
 </div>
   
@@ -586,8 +591,8 @@ h1 { text-align: center; color: #333; }
       
       <div id="manualSetupPanel" style="display:none;">
         <div class="info-box">
-          <h4>Create Special Matches</h4>
-          <p>Set up demonstration matches, special requests, or exhibition games. These players will be excluded from automatic match generation.</p>
+          <h4>Create Manual Matches</h4>
+          <p>Set up special requests or exhibition games. These players will be excluded from automatic match generation.</p>
         </div>
         
         <div id="manualPlayerSelection">
@@ -1002,11 +1007,12 @@ nameInput.addEventListener('input', (e) => {
   updateProceedButton();
 });
   
-  const restingCheckbox = tr.querySelector(`#resting-${rowIndex}`);
-  restingCheckbox.addEventListener('change', (e) => {
-    playerRows[rowIndex].resting = e.target.checked;
-    updateSitOffCalculation();
-  });
+ const restingCheckbox = tr.querySelector(`#resting-${rowIndex}`);
+restingCheckbox.addEventListener('change', (e) => {
+  playerRows[rowIndex].resting = e.target.checked;
+  updateSitOffCalculation();
+  updateProceedButton();
+});
   
   const psoCheckbox = tr.querySelector(`#pso-${rowIndex}`);
   psoCheckbox.addEventListener('change', (e) => {
@@ -1234,8 +1240,8 @@ function updateSitOffCalculation() {
   }
 }
 function updateProceedButton() {
- const activePlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting);
-const soPlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting && p.so);
+  const activePlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting);
+  const soPlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.grade !== '' && p.gender !== '' && !p.resting && p.so);
   const proceedBtn = document.getElementById('proceedToMatches');
   
   if (activePlayers.length >= 4 && availableCourts.length > 0) {
@@ -1243,28 +1249,24 @@ const soPlayers = playerRows.filter(p => p.name && p.name.trim() !== '' && p.gra
     const sitOffNeeded = totalActivePlayers % 4;
     const sitOffSelected = soPlayers.length;
     
-    if (sitOffNeeded === 0 && sitOffSelected === 0) {
-      // No sit-offs needed, none selected - perfect
+    if (sitOffNeeded === 0) {
+      // No sit-offs needed (including when resting players make it divisible by 4)
       proceedBtn.disabled = false;
       proceedBtn.textContent = 'Proceed to Match Setup';
-    } else if (sitOffNeeded > 0 && sitOffSelected === sitOffNeeded) {
+    } else if (sitOffSelected === sitOffNeeded) {
       // Sit-offs needed and correct number selected
       proceedBtn.disabled = false;
       proceedBtn.textContent = 'Proceed to Match Setup';
-    } else if (sitOffNeeded > 0 && sitOffSelected < sitOffNeeded) {
+    } else if (sitOffSelected < sitOffNeeded) {
       // Need more selections
       const needed = sitOffNeeded - sitOffSelected;
       proceedBtn.disabled = true;
       proceedBtn.textContent = `Select ${needed} more to sit off`;
-    } else if (sitOffNeeded > 0 && sitOffSelected > sitOffNeeded) {
+    } else if (sitOffSelected > sitOffNeeded) {
       // Too many selected
       const excess = sitOffSelected - sitOffNeeded;
       proceedBtn.disabled = true;
       proceedBtn.textContent = `Remove ${excess} sit-off selections`;
-    } else if (sitOffNeeded === 0 && sitOffSelected > 0) {
-      // No sit-offs needed but some selected
-      proceedBtn.disabled = true;
-      proceedBtn.textContent = `Remove ${sitOffSelected} sit-off selections (none needed)`;
     }
   } else {
     proceedBtn.disabled = true;
