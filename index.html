@@ -413,6 +413,44 @@ h1 { text-align: center; color: #333; }
     .player-box.manual-match { background-color: #fff8dc; border: 2px solid #ffc107; }
     .player-box.drag-over { border-color: #28a745; border-width: 3px; background-color: #e8f5e8; }
     .format { font-style: italic; color: #666; margin-top: 8px; font-size: 0.9em; }
+
+.player-box-compact {
+  background: white; 
+  border: 2px solid #ddd; 
+  padding: 4px 8px; 
+  border-radius: 5px; 
+  cursor: move; 
+  user-select: none; 
+  text-align: center;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+.player-box-compact:hover { 
+  border-color: #007acc; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+}
+.player-box-compact.dragging { 
+  opacity: 0.5; 
+  transform: rotate(2deg); 
+}
+.player-box-compact.nhc { 
+  background-color: #ffeb3b; 
+  font-weight: bold; 
+}
+.player-box-compact.repeat-partner { 
+  background-color: #ff9800; 
+  border: 2px solid #f57c00; 
+  font-weight: bold; 
+}
+.player-box-compact.manual-match { 
+  background-color: #fff8dc; 
+  border: 2px solid #ffc107; 
+}
+.player-box-compact.drag-over { 
+  border-color: #28a745; 
+  border-width: 3px; 
+  background-color: #e8f5e8; 
+}
     
     .info-box { background: #cff4fc; border: 1px solid #0dcaf0; padding: 15px; border-radius: 5px; margin: 15px 0; }
     .warning-box { background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 5px; margin: 15px 0; }
@@ -1049,7 +1087,7 @@ function handleNameInput(e, rowIndex) {
     const suggestionDiv = document.createElement('div');
     suggestionDiv.className = 'autocomplete-suggestion';
     if (index === 0) suggestionDiv.classList.add('selected'); // Auto-select first item
-    suggestionDiv.textContent = `${player.name} (${player.grade}, ${player.gender})`;
+    suggestionDiv.textContent = `${player.name} (${player.grade})`;
     suggestionDiv.addEventListener('click', () => selectPlayer(rowIndex, player));
     suggestionsDiv.appendChild(suggestionDiv);
   });
@@ -2452,7 +2490,7 @@ function autoFixRepeatPartnerships(data, matches) {
   const workingMatches = JSON.parse(JSON.stringify(matches));
   
   // Get repeat partnerships
-  const repeatPartners = checkForRepeatPartnerships(currentSetNum, workingMatches);
+  let repeatPartners = checkForRepeatPartnerships(currentSetNum, workingMatches);
   
   if (repeatPartners.length === 0) {
     log("No repeat partnerships found - no auto-fixes needed");
@@ -2461,27 +2499,39 @@ function autoFixRepeatPartnerships(data, matches) {
   
   log("Found " + repeatPartners.length + " repeat partnerships to attempt fixing");
   
-  // Limit to fixing the first 10 repeat partnerships to prevent exponential blowup
+  // STRICT LIMIT: Only fix the first 10 repeat partnerships to prevent browser lockup
   const maxFixes = Math.min(10, repeatPartners.length);
   if (maxFixes < repeatPartners.length) {
-    log("Limiting auto-fixes to first " + maxFixes + " partnerships for performance");
+    log("PERFORMANCE LIMIT: Only attempting to fix first " + maxFixes + " partnerships to prevent browser lockup");
+    log("Remaining " + (repeatPartners.length - maxFixes) + " partnerships will be left for manual adjustment");
   }
-  
+
   // PHASE 1: Try simple intra-match swaps first (especially for same-sex matches)
   log("=== PHASE 1: INTRA-MATCH FIXES ===");
   
-  repeatPartners.slice(0, maxFixes).forEach((repeat, repeatIndex) => {
+  let fixedCount = 0;
+  let attemptCount = 0;
+  const maxAttempts = 50; // Hard limit to prevent infinite loops
+  
+  for (let i = 0; i < maxFixes && fixedCount < maxFixes && attemptCount < maxAttempts; i++) {
+    attemptCount++;
+    
+    // Get fresh repeat partnerships (some may have been fixed)
+    const currentRepeats = checkForRepeatPartnerships(currentSetNum, workingMatches);
+    if (currentRepeats.length === 0 || i >= currentRepeats.length) break;
+    
+    const repeat = currentRepeats[i];
     const matchIndex = repeat.matchIndex;
     const teamNum = parseInt(repeat.team);
     const match = workingMatches[matchIndex];
     const currentTeam = teamNum === 1 ? match.team1 : match.team2;
     const opposingTeam = teamNum === 1 ? match.team2 : match.team1;
     
-    log("Attempting intra-match fix for: " + repeat.players.join(" & ") + " (Match " + matchIndex + ", Team " + teamNum + ")");
+    log("Attempting intra-match fix " + (i + 1) + "/" + maxFixes + ": " + repeat.players.join(" & "));
     
-    // For same-sex matches, try simple intra-match swaps without complex criteria
-    if (match.format.includes("Same-Sex")) {
-      const beforeCount = checkForRepeatPartnerships(currentSetNum, workingMatches).length;
+    // Try simple intra-match swaps for both same-sex and mixed doubles matches
+    if (match.format.includes("Same-Sex") || match.format.includes("Mixed Doubles")) {
+      const beforeCount = currentRepeats.length;
       
       // Try swapping each player in the problematic team with each player in opposing team
       let fixedInMatch = false;
@@ -2491,9 +2541,31 @@ function autoFixRepeatPartnerships(data, matches) {
           const currentPlayer = currentTeam[currentPlayerIndex];
           const opponentPlayer = opposingTeam[opponentIndex];
           
-          // For same-sex matches, players should be same gender, so swap should be safe
-          if (getPlayerGender(currentPlayer.name, data) !== getPlayerGender(opponentPlayer.name, data)) {
-            continue; // Skip if different genders (shouldn't happen in same-sex match)
+          // For same-sex matches, ensure players are same gender
+          if (match.format.includes("Same-Sex")) {
+            if (getPlayerGender(currentPlayer.name, data) !== getPlayerGender(opponentPlayer.name, data)) {
+              continue; // Skip if different genders
+            }
+          }
+          
+          // For mixed doubles, ensure the swap maintains the mixed format
+          if (match.format.includes("Mixed Doubles")) {
+            // Check if swapping would break the mixed doubles format
+            const tempTeam1 = [...currentTeam];
+            const tempTeam2 = [...opposingTeam];
+            tempTeam1[currentPlayerIndex] = opponentPlayer;
+            tempTeam2[opponentIndex] = currentPlayer;
+            
+            // Count genders in each team after swap
+            const team1Men = tempTeam1.filter(p => getPlayerGender(p.name, data) === 'M').length;
+            const team1Women = tempTeam1.filter(p => getPlayerGender(p.name, data) === 'W').length;
+            const team2Men = tempTeam2.filter(p => getPlayerGender(p.name, data) === 'M').length;
+            const team2Women = tempTeam2.filter(p => getPlayerGender(p.name, data) === 'W').length;
+            
+            // Only allow swap if both teams remain 1M+1W (mixed doubles format)
+            if (!(team1Men === 1 && team1Women === 1 && team2Men === 1 && team2Women === 1)) {
+              continue; // Skip swap that would break mixed doubles format
+            }
           }
           
           // Perform the test swap
@@ -2507,6 +2579,7 @@ function autoFixRepeatPartnerships(data, matches) {
             log("✓ Intra-match fix: Swapped " + currentPlayer.name + " ↔ " + opponentPlayer.name);
             log("  Repeat partnerships reduced from " + beforeCount + " to " + afterCount);
             fixedInMatch = true;
+            fixedCount++;
             break;
           } else {
             // Revert the swap - it didn't help
@@ -2517,91 +2590,87 @@ function autoFixRepeatPartnerships(data, matches) {
       }
       
       if (fixedInMatch) {
-        return; // Move to next repeat partnership
+        continue; // Move to next repeat partnership
       }
     }
-  });
-  
-  // Check if Phase 1 solved everything
-  const remainingRepeats = checkForRepeatPartnerships(currentSetNum, workingMatches);
-  if (remainingRepeats.length === 0) {
-    log("🎉 Phase 1 resolved all repeat partnerships!");
-    return workingMatches;
   }
   
-  // PHASE 2: Complex inter-match swaps (original logic)
+  // Check if Phase 1 solved enough or we've hit our limits
+  const remainingRepeats = checkForRepeatPartnerships(currentSetNum, workingMatches);
+  if (remainingRepeats.length === 0 || fixedCount >= maxFixes || attemptCount >= maxAttempts) {
+    if (remainingRepeats.length === 0) {
+      log("🎉 Phase 1 resolved all repeat partnerships!");
+    } else if (fixedCount >= maxFixes) {
+      log("Phase 1 completed: Fixed maximum allowed (" + maxFixes + ") partnerships");
+      log("Remaining " + remainingRepeats.length + " partnerships left for manual adjustment");
+    } else {
+      log("Phase 1 stopped at attempt limit (" + maxAttempts + ") to prevent browser lockup");
+      log("Remaining " + remainingRepeats.length + " partnerships left for manual adjustment");
+    }
+    return workingMatches;
+  }
+
+  // PHASE 2: Complex inter-match swaps (much more limited)
   log("=== PHASE 2: INTER-MATCH FIXES ===");
   log("Remaining repeats after Phase 1: " + remainingRepeats.length);
   
-  // Get set format preference for prioritizing swap types
-  const setFormatPreference = data.setFormatPreference;
-  
-  // Process remaining repeat partnerships with original complex logic
-  remainingRepeats.slice(0, maxFixes).forEach((repeat, repeatIndex) => {
-    const matchIndex = repeat.matchIndex;
-    const teamNum = parseInt(repeat.team);
-    const match = workingMatches[matchIndex];
-    const currentTeam = teamNum === 1 ? match.team1 : match.team2;
-    const opposingTeam = teamNum === 1 ? match.team2 : match.team1;
+  // Only attempt inter-match fixes if we haven't hit our limits yet
+  if (fixedCount < maxFixes && attemptCount < maxAttempts) {
+    const remainingFixAttempts = maxFixes - fixedCount;
+    const remainingAttemptBudget = maxAttempts - attemptCount;
     
-    log("Attempting inter-match fix for: " + repeat.players.join(" & ") + " (Match " + matchIndex + ", Team " + teamNum + ")");
+    log("Budget remaining: " + remainingFixAttempts + " fixes, " + remainingAttemptBudget + " attempts");
     
-    let fixedInMatch = false;
+    // Get set format preference for prioritizing swap types
+    const setFormatPreference = data.setFormatPreference;
     
-    // Define swap priority based on set format preference
-    const swapStrategies = [];
-    
-    if (setFormatPreference === "Same-Sex") {
-      swapStrategies.push(
+    // Process remaining repeat partnerships with simplified logic
+    for (let i = 0; i < Math.min(remainingFixAttempts, remainingRepeats.length) && attemptCount < maxAttempts; i++) {
+      attemptCount++;
+      
+      const repeat = remainingRepeats[i];
+      const matchIndex = repeat.matchIndex;
+      const teamNum = parseInt(repeat.team);
+      const match = workingMatches[matchIndex];
+      const currentTeam = teamNum === 1 ? match.team1 : match.team2;
+      
+      log("Attempting inter-match fix " + (i + 1) + ": " + repeat.players.join(" & "));
+      
+      let fixedInMatch = false;
+      
+      // Simplified swap strategies - only try the most promising ones
+      const swapStrategies = [
         { name: "Same grade, same gender", criteria: (p1, p2) => p1.grade === p2.grade && getPlayerGender(p1.name, data) === getPlayerGender(p2.name, data) },
-        { name: "Adjacent grade, same gender", criteria: (p1, p2) => Math.abs(p1.grade - p2.grade) === 1 && getPlayerGender(p1.name, data) === getPlayerGender(p2.name, data) },
-        { name: "Same grade, cross gender", criteria: (p1, p2) => p1.grade === p2.grade && getPlayerGender(p1.name, data) !== getPlayerGender(p2.name, data) }
-      );
-    } else { // Mixed format preference
-      swapStrategies.push(
-        { name: "Same grade, cross gender", criteria: (p1, p2) => p1.grade === p2.grade && getPlayerGender(p1.name, data) !== getPlayerGender(p2.name, data) },
-        { name: "Adjacent grade, cross gender", criteria: (p1, p2) => Math.abs(p1.grade - p2.grade) === 1 && getPlayerGender(p1.name, data) !== getPlayerGender(p2.name, data) },
-        { name: "Same grade, same gender", criteria: (p1, p2) => p1.grade === p2.grade && getPlayerGender(p1.name, data) === getPlayerGender(p2.name, data) }
-      );
-    }
-    
-    // Try swaps with other matches
-    for (let strategy of swapStrategies) {
-      if (fixedInMatch) break;
+        { name: "Adjacent grade, same gender", criteria: (p1, p2) => Math.abs(p1.grade - p2.grade) === 1 && getPlayerGender(p1.name, data) === getPlayerGender(p2.name, data) }
+      ];
       
-      log("  Trying inter-match strategy: " + strategy.name);
-      
-      for (let otherMatchIndex = 0; otherMatchIndex < workingMatches.length && !fixedInMatch; otherMatchIndex++) {
-        if (otherMatchIndex === matchIndex) continue;
+      // Try swaps with other matches (limited scope)
+      for (let strategy of swapStrategies) {
+        if (fixedInMatch || attemptCount >= maxAttempts) break;
         
-        const otherMatch = workingMatches[otherMatchIndex];
-        
-        // Try swapping with players from both teams of other matches
-        for (let otherTeamNum = 1; otherTeamNum <= 2 && !fixedInMatch; otherTeamNum++) {
-          const otherTeam = otherTeamNum === 1 ? otherMatch.team1 : otherMatch.team2;
+        for (let otherMatchIndex = 0; otherMatchIndex < Math.min(10, workingMatches.length) && !fixedInMatch && attemptCount < maxAttempts; otherMatchIndex++) {
+          if (otherMatchIndex === matchIndex) continue;
           
-          // Try swapping each player from current team with each player from other team
-          for (let currentPlayerIndex = 0; currentPlayerIndex < currentTeam.length && !fixedInMatch; currentPlayerIndex++) {
-            for (let otherPlayerIndex = 0; otherPlayerIndex < otherTeam.length && !fixedInMatch; otherPlayerIndex++) {
+          const otherMatch = workingMatches[otherMatchIndex];
+          
+          // Try swapping with players from both teams of other matches
+          for (let otherTeamNum = 1; otherTeamNum <= 2 && !fixedInMatch; otherTeamNum++) {
+            const otherTeam = otherTeamNum === 1 ? otherMatch.team1 : otherMatch.team2;
+            
+            // Try swapping only the first player to reduce complexity
+            for (let otherPlayerIndex = 0; otherPlayerIndex < Math.min(1, otherTeam.length) && !fixedInMatch; otherPlayerIndex++) {
               
-              const currentPlayer = currentTeam[currentPlayerIndex];
+              const currentPlayer = currentTeam[0]; // Only try first player
               const otherPlayer = otherTeam[otherPlayerIndex];
               
               // Check if this swap meets the current strategy criteria
               if (!strategy.criteria(currentPlayer, otherPlayer)) continue;
               
-              // For adjacent grade swaps, ensure balanced teams in both matches
-              if (strategy.name.includes("Adjacent grade")) {
-                if (!wouldCreateBalancedTeams(workingMatches, matchIndex, currentPlayerIndex, teamNum, otherPlayerIndex, otherTeamNum, otherMatchIndex)) {
-                  continue;
-                }
-              }
-              
               // Test the swap
               const beforeCount = checkForRepeatPartnerships(currentSetNum, workingMatches).length;
               
               // Perform the test swap
-              currentTeam[currentPlayerIndex] = otherPlayer;
+              currentTeam[0] = otherPlayer;
               otherTeam[otherPlayerIndex] = currentPlayer;
               
               const afterCount = checkForRepeatPartnerships(currentSetNum, workingMatches).length;
@@ -2611,36 +2680,35 @@ function autoFixRepeatPartnerships(data, matches) {
                 log("✓ Inter-match fix (" + strategy.name + "): Swapped " + currentPlayer.name + " ↔ " + otherPlayer.name);
                 log("  Repeat partnerships reduced from " + beforeCount + " to " + afterCount);
                 fixedInMatch = true;
+                fixedCount++;
                 break;
               } else {
                 // Revert the swap - it didn't help
-                currentTeam[currentPlayerIndex] = currentPlayer;
+                currentTeam[0] = currentPlayer;
                 otherTeam[otherPlayerIndex] = otherPlayer;
               }
             }
           }
         }
       }
+      
+      if (!fixedInMatch) {
+        log("❌ Could not auto-fix: " + repeat.players.join(" & ") + " - leaving for manual adjustment");
+      }
     }
-    
-    if (!fixedInMatch) {
-      log("❌ Could not auto-fix: " + repeat.players.join(" & ") + " - leaving for manual adjustment");
-    }
-  });
+  }
   
   const finalRepeats = checkForRepeatPartnerships(currentSetNum, workingMatches);
   if (finalRepeats.length > 0) {
-    log("❌ Could not resolve all repeat partnerships. Remaining: " + finalRepeats.length);
-    finalRepeats.forEach(rp => {
-      log("  - " + rp.players.join(" & ") + " (previously in Set " + rp.previousSet + ")");
-    });
+    log("❌ Auto-fix completed with limits. Remaining: " + finalRepeats.length);
+    log("Fixed: " + fixedCount + " partnerships in " + attemptCount + " attempts");
+    log("Remaining partnerships require manual drag-and-drop adjustment");
   } else {
     log("🎉 Successfully resolved all repeat partnerships!");
   }
   
   return workingMatches;
 }
-
 function wouldCreateBalancedTeams(matches, match1Index, player1Index, team1Num, player2Index, team2Num, match2Index = null) {
   // If match2Index is null, we're swapping within the same match
   const match2Index_actual = match2Index !== null ? match2Index : match1Index;
@@ -3021,50 +3089,49 @@ const satOffPlayers = playerRows.filter(p => p.name && p.so).map(p => p.name);
     matchHtml += '<div class="' + containerClass + '">';
     
     const courtClass = isManual ? 'court-box manual' : 'court-box';
-    matchHtml += '<div class="' + courtClass + '" draggable="true" data-type="court" data-match="' + matchIndex + '" data-court="' + match.court + '">';
-    matchHtml += 'Court ' + match.court;
-    if (isManual) matchHtml += ' (Manual)';
-    matchHtml += '</div>';
-    
-    matchHtml += '<div class="teams-row">';
-    
-    matchHtml += '<div class="team-column"><div class="team-header">Team 1</div>';
-    match.team1.forEach((player, playerIndex) => {
-      const nhcClass = isNHCPlayer(player.name) ? ' nhc' : '';
-      const manualClass = isManual ? ' manual-match' : '';
-      // Check if THIS specific player is part of a repeat partnership
-      const isRepeatPartner = repeatPartners.some(rp => 
-        rp.matchIndex === matchIndex && 
-        rp.team === 1 && 
-        rp.players.includes(player.name)
-      );
-      const repeatClass = isRepeatPartner ? ' repeat-partner' : '';
-      matchHtml += '<div class="player-box' + nhcClass + repeatClass + manualClass + '" draggable="true" ';
-      matchHtml += 'data-type="player" data-match="' + matchIndex + '" data-team="1" data-player="' + playerIndex + '" ';
-      matchHtml += 'data-name="' + player.name + '" data-grade="' + player.grade + '">';
-      matchHtml += player.name + ' (' + translateGrade(player.grade) + ')</div>';
-    });
-    matchHtml += '</div>';
-    
-    matchHtml += '<div class="team-column"><div class="team-header">Team 2</div>';
-    match.team2.forEach((player, playerIndex) => {
-      const nhcClass = isNHCPlayer(player.name) ? ' nhc' : '';
-      const manualClass = isManual ? ' manual-match' : '';
-      // Check if THIS specific player is part of a repeat partnership
-      const isRepeatPartner = repeatPartners.some(rp => 
-        rp.matchIndex === matchIndex && 
-        rp.team === 2 && 
-        rp.players.includes(player.name)
-      );
-      const repeatClass = isRepeatPartner ? ' repeat-partner' : '';
-      matchHtml += '<div class="player-box' + nhcClass + repeatClass + manualClass + '" draggable="true" ';
-      matchHtml += 'data-type="player" data-match="' + matchIndex + '" data-team="2" data-player="' + playerIndex + '" ';
-      matchHtml += 'data-name="' + player.name + '" data-grade="' + player.grade + '">';
-      matchHtml += player.name + ' (' + translateGrade(player.grade) + ')</div>';
-    });
-    matchHtml += '</div>';
-    
-    matchHtml += '</div>';
+    matchHtml += '<div class="compact-teams-row" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">';
+
+matchHtml += '<div class="' + courtClass + '" draggable="true" data-type="court" data-match="' + matchIndex + '" data-court="' + match.court + '">';
+matchHtml += 'Court ' + match.court;
+if (isManual) matchHtml += ' (Manual)';
+matchHtml += '</div>';
+
+// Team 1 players
+match.team1.forEach((player, playerIndex) => {
+  const nhcClass = isNHCPlayer(player.name) ? ' nhc' : '';
+  const manualClass = isManual ? ' manual-match' : '';
+  const isRepeatPartner = repeatPartners.some(rp => 
+    rp.matchIndex === matchIndex && 
+    rp.team === 1 && 
+    rp.players.includes(player.name)
+  );
+  const repeatClass = isRepeatPartner ? ' repeat-partner' : '';
+  matchHtml += '<div class="player-box-compact' + nhcClass + repeatClass + manualClass + '" draggable="true" ';
+  matchHtml += 'data-type="player" data-match="' + matchIndex + '" data-team="1" data-player="' + playerIndex + '" ';
+  matchHtml += 'data-name="' + player.name + '" data-grade="' + player.grade + '">';
+  matchHtml += player.name + ' (' + translateGrade(player.grade) + ')</div>';
+});
+
+// VS divider
+matchHtml += '<div class="vs-compact" style="font-weight: bold; color: #666; margin: 0 5px;">vs</div>';
+
+// Team 2 players
+match.team2.forEach((player, playerIndex) => {
+  const nhcClass = isNHCPlayer(player.name) ? ' nhc' : '';
+  const manualClass = isManual ? ' manual-match' : '';
+  const isRepeatPartner = repeatPartners.some(rp => 
+    rp.matchIndex === matchIndex && 
+    rp.team === 2 && 
+    rp.players.includes(player.name)
+  );
+  const repeatClass = isRepeatPartner ? ' repeat-partner' : '';
+  matchHtml += '<div class="player-box-compact' + nhcClass + repeatClass + manualClass + '" draggable="true" ';
+  matchHtml += 'data-type="player" data-match="' + matchIndex + '" data-team="2" data-player="' + playerIndex + '" ';
+  matchHtml += 'data-name="' + player.name + '" data-grade="' + player.grade + '">';
+  matchHtml += player.name + ' (' + translateGrade(player.grade) + ')</div>';
+});
+
+matchHtml += '</div>';
    // matchHtml += '<div class="format">' + match.format;
    // if (isManual) matchHtml += ' - Manual Setup';
    // matchHtml += '</div>';
@@ -3120,17 +3187,17 @@ function initializeDragAndDrop() {
     e.preventDefault();
   });
   
-  newMatchResults.addEventListener('dragenter', function(e) {
-    if (e.target.classList.contains('player-box') || e.target.classList.contains('court-box')) {
-      e.target.classList.add('drag-over');
-    }
-  });
-  
-  newMatchResults.addEventListener('dragleave', function(e) {
-    if (e.target.classList.contains('player-box') || e.target.classList.contains('court-box')) {
-      e.target.classList.remove('drag-over');
-    }
-  });
+ newMatchResults.addEventListener('dragenter', function(e) {
+  if (e.target.classList.contains('player-box') || e.target.classList.contains('player-box-compact') || e.target.classList.contains('court-box')) {
+    e.target.classList.add('drag-over');
+  }
+});
+
+newMatchResults.addEventListener('dragleave', function(e) {
+  if (e.target.classList.contains('player-box') || e.target.classList.contains('player-box-compact') || e.target.classList.contains('court-box')) {
+    e.target.classList.remove('drag-over');
+  }
+});
   
   newMatchResults.addEventListener('drop', function(e) {
     e.preventDefault();
@@ -3142,7 +3209,7 @@ function initializeDragAndDrop() {
     
     dropTarget.classList.remove('drag-over');
     
-    if (draggedData.type === 'player' && dropTarget.classList.contains('player-box')) {
+if (draggedData.type === 'player' && (dropTarget.classList.contains('player-box') || dropTarget.classList.contains('player-box-compact'))) {
       const targetData = {
         match: parseInt(dropTarget.dataset.match),
         team: dropTarget.dataset.team,
@@ -3320,33 +3387,34 @@ function printMatchSheet(data, matches) {
       border-left: 5px solid #ffc107;
     }
     .court-number { 
-      font-size: 20px; 
-      font-weight: bold; 
-      background: black; 
-      color: white; 
-      padding: 8px 12px; 
-      border-radius: 5px; 
-      display: inline-block; 
-      margin-bottom: 12px;
-    }
+  font-size: 16px; 
+  font-weight: bold; 
+  background: black; 
+  color: white; 
+  padding: 4px 8px; 
+  border-radius: 3px; 
+  display: inline-block; 
+  margin-right: 10px;
+}
     .court-number.manual { 
       background: #ffc107; 
       color: #856404;
     }
     @media print {
-      body { margin: 15px; }
-      .match { page-break-inside: avoid; }
-      .court-number { 
-        background: none !important; 
-        color: black !important; 
-        border: 2px solid black;
-        padding: 6px 10px;
-      }
-      .court-number.manual { 
-        border-color: #ffc107 !important;
-        background: #fff8dc !important;
-      }
-    }
+  body { margin: 15px; }
+  .match { page-break-inside: avoid; }
+  .court-number { 
+    background: none !important; 
+    color: black !important; 
+    border: 1px solid black;
+    padding: 2px 6px;
+    font-size: 16px;
+  }
+  .court-number.manual { 
+    border-color: #ffc107 !important;
+    background: #fff8dc !important;
+  }
+}
     .teams-container { 
       display: flex; 
       justify-content: space-between; 
@@ -3396,8 +3464,8 @@ const team2Str = match.team2.map(p => `${p.name} (${translateGrade(p.grade)})`).
       
       printHTML += `
   <div class="match${isManual ? ' manual' : ''}">
-    <div class="court-number${isManual ? ' manual' : ''}">Court ${match.court}${isManual ? ' (Manual)' : ''}</div>
     <div class="teams-container">
+      <div class="court-number${isManual ? ' manual' : ''}">Court ${match.court}${isManual ? ' (Manual)' : ''}</div>
       <div class="team">${team1Str}</div>
       <div class="vs">VS</div>
       <div class="team">${team2Str}</div>
@@ -3482,8 +3550,28 @@ function createSingleSetSheet(wb, data, matches, setNumber, satOffPlayers = []) 
     // Add match data if we have a match for this row
     if (i < matches.length) {
       const match = matches[i];
-     const team1Str = match.team1.map(p => `${p.name} (${translateGrade(p.grade)})`).join(', ');
-const team2Str = match.team2.map(p => `${p.name} (${translateGrade(p.grade)})`).join(', ');
+     // Check for repeat partnerships for this match
+const repeatPartners = checkForRepeatPartnerships(setNumber, matches);
+
+const team1Str = match.team1.map(p => {
+  const isRepeatPartner = repeatPartners.some(rp => 
+    rp.matchIndex === i && 
+    rp.team === 1 && 
+    rp.players.includes(p.name)
+  );
+  const prefix = isRepeatPartner ? 'R:' : '';
+  return `${prefix}${p.name} (${translateGrade(p.grade)})`;
+}).join(', ');
+
+const team2Str = match.team2.map(p => {
+  const isRepeatPartner = repeatPartners.some(rp => 
+    rp.matchIndex === i && 
+    rp.team === 2 && 
+    rp.players.includes(p.name)
+  );
+  const prefix = isRepeatPartner ? 'R:' : '';
+  return `${prefix}${p.name} (${translateGrade(p.grade)})`;
+}).join(', ');
       const satOffPlayer = i < satOffPlayers.length ? satOffPlayers[i] : '';
       const matchType = match.isManual ? 'Manual' : 'Auto';
       
