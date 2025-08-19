@@ -488,24 +488,7 @@ h1 { text-align: center; color: #333; }
   opacity: 1;
 }
 
-/* Clear data button */
-.clear-data-btn {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-}
 
-.clear-data-btn:hover {
-  background: #c82333;
-}
   </style>
 </head>
 <body>
@@ -527,10 +510,11 @@ h1 { text-align: center; color: #333; }
   <div class="step-header">Step 1: Select available courts</div>
   
   <div style="text-align: center; margin: 15px 0; padding: 10px; background: #e3f2fd; border-radius: 5px;">
-    <button id="importExcelBtn" class="secondary" style="background: #17a2b8;">📁 Import Excel File</button>
-    <input type="file" id="excelFileInput" accept=".xlsx,.xls" style="display: none;">
-    <div style="font-size: 12px; color: #666; margin-top: 5px;">Import players and courts from Excel file</div>
-  </div>
+  <button id="importExcelBtn" class="secondary" style="background: #17a2b8;">📋 Import Excel File</button>
+  <button onclick="clearSavedData()" class="danger" style="margin-left: 10px;">Clear Saved Data</button>
+  <input type="file" id="excelFileInput" accept=".xlsx,.xls" style="display: none;">
+  <div style="font-size: 12px; color: #666; margin-top: 5px;">Import players and courts from Excel file</div>
+</div>
      
     <h4>Selected Courts</h4>
     <div id="availableCourts" class="available-courts">
@@ -671,8 +655,228 @@ let currentMatches = null;
 let allSetsData = {};
 let currentSetNumber = 1;
 
+// ===== A/B SMART MIXING HELPERS (paste once) =====
+
+// Cut an array into [A,B] halves (A gets the extra if odd)
+function splitAB(arr) {
+  const mid = Math.ceil(arr.length / 2);
+  return [arr.slice(0, mid), arr.slice(mid)];
+}
+
+// Simple cyclic rotation (positive = right; negative = left)
+function rotateRight(arr, k) {
+  const n = arr.length;
+  if (n === 0) return arr.slice();
+  const r = ((k % n) + n) % n;
+  if (r === 0) return arr.slice();
+  return arr.slice(n - r).concat(arr.slice(0, n - r));
+}
+
+// Interleave two arrays A and B like A0,B0,A1,B1,...
+function interleaveAB(A, B) {
+  const out = [];
+  const n = Math.max(A.length, B.length);
+  for (let i = 0; i < n; i++) {
+    if (i < A.length) out.push(A[i]);
+    if (i < B.length) out.push(B[i]);
+  }
+  return out;
+}
+
+// A/B Smart Mixing for one gender list (already grade-sorted high→low)
+// setNum = 1,2,3,...  (Set 1 = no rotation)
+function mixABSmart(oneGenderSorted, setNum) {
+  const n = oneGenderSorted.length;
+  if (n <= 1) return oneGenderSorted.slice();
+
+  // Split into A (top half) and B (bottom half)
+  let [A, B] = splitAB(oneGenderSorted);
+
+  // Drift each half by different amounts to avoid sticky tails.
+  // Using small, different steps spreads matchups well.
+  const shiftA = (setNum - 1);       // 0,1,2,3,...
+  const shiftB = 2 * (setNum - 1);   // 0,2,4,6,...
+
+  A = rotateRight(A, shiftA);
+  B = rotateRight(B, shiftB);
+
+  // Interleave to produce the mixed order
+  return interleaveAB(A, B);
+}
+
+
+// Toggle which mixing mode to use by commenting/uncommenting one line:
+// const MIXING_MODE = "torus";    // old Torus drift rotation
+const MIXING_MODE = "ab-smart";   // new A/B Smart Mixing (default)
+
+
 // Manual match variables
 let manualMatches = [];
+
+
+// Perfect 16 detection and management
+
+function getPerfect16Schedule(setNumber) {
+  // Each array represents one match: [player1, player2, player3, player4]
+  // Players 1&2 are partners vs players 3&4 as partners
+  // Players numbered 0-15
+  
+ const schedules = {
+  1: [
+    [0, 1, 2, 3],
+    [4, 5, 6, 7],
+    [8, 9, 10, 11],
+    [12, 13, 14, 15]
+  ],
+  2: [
+    [0, 4, 8, 12],
+    [1, 5, 9, 13],
+    [2, 6, 10, 14],
+    [3, 7, 11, 15]
+  ],
+  3: [
+    [0, 5, 10, 15],
+    [1, 4, 11, 14],
+    [2, 7, 8, 13],
+    [3, 6, 9, 12]
+  ],
+  4: [
+    [0, 6, 11, 13],
+    [1, 7, 10, 12],
+    [2, 4, 9, 15],
+    [3, 5, 8, 14]
+  ],
+  5: [
+    [0, 7, 9, 14],
+    [1, 6, 8, 15],
+    [2, 5, 11, 12],
+    [3, 4, 10, 13]
+  ]
+};
+
+  
+  return schedules[setNumber] || null;
+}
+
+function generatePerfect16Matches(setNumber) {
+  log("Generating Perfect 16 matches for Set " + setNumber);
+  
+  // Get the 16 players in order of entry
+  const players = playerRows.filter(p => 
+    p.name && p.name.trim() !== '' && 
+    p.grade !== '' && 
+    p.gender !== '' && 
+    !p.resting && 
+    !p.so
+  );
+  
+  if (players.length !== 16) {
+    log("ERROR: Expected 16 players, found " + players.length);
+    return null;
+  }
+  
+  // Number players 0-15 for the algorithm
+  const numberedPlayers = players.map((player, index) => ({
+    ...player,
+    id: index
+  }));
+  
+  // Get the predetermined schedule for this set
+  const schedule = getPerfect16Schedule(setNumber);
+  if (!schedule) {
+    log("ERROR: No schedule found for Set " + setNumber);
+    return null;
+  }
+  
+  // Convert schedule to actual matches
+  const matches = [];
+  let courtIndex = 0;
+  
+  schedule.forEach(round => {
+    if (courtIndex >= currentData.courts.length) {
+      log("ERROR: Not enough courts for Perfect 16");
+      return null;
+    }
+    
+    const court = currentData.courts[courtIndex].court;
+    const team1 = [numberedPlayers[round[0]], numberedPlayers[round[1]]];
+    const team2 = [numberedPlayers[round[2]], numberedPlayers[round[3]]];
+    
+    // Determine format
+    const format = players[0].gender === 'M' ? "Same-Sex Doubles (Men)" : "Same-Sex Doubles (Women)";
+    
+    matches.push({
+      court: court,
+      team1: team1,
+      team2: team2,
+      format: format,
+      note: "Perfect 16 Set " + setNumber
+    });
+    
+    courtIndex++;
+  });
+  
+  log("Perfect 16: Generated " + matches.length + " matches for Set " + setNumber);
+  return matches;
+}
+
+function detectPerfect16Scenario() {
+
+
+  const currentSetNum = parseInt(document.getElementById('setNumberSelector').value);
+  
+  // Only applies to sets 1-5
+  if (currentSetNum < 1 || currentSetNum > 5) {
+    return false;
+  }
+  
+  // Check if any manual matches exist for any set 1-5
+  for (let setNum = 1; setNum <= 5; setNum++) {
+    if (allSetsData[setNum] && allSetsData[setNum].matches) {
+      const hasManualMatches = allSetsData[setNum].matches.some(match => match.isManual);
+      if (hasManualMatches) {
+        log("Perfect 16 disabled: Manual matches detected in Set " + setNum);
+        return false;
+      }
+    }
+  }
+  
+  // Check current manual matches
+  if (manualMatches && manualMatches.length > 0) {
+    log("Perfect 16 disabled: Manual matches selected for current set");
+    return false;
+  }
+  
+  // Check if we have exactly 16 players
+  const activePlayers = playerRows.filter(p => 
+    p.name && p.name.trim() !== '' && 
+    p.grade !== '' && 
+    p.gender !== '' && 
+    !p.resting && 
+    !p.so
+  );
+  
+  if (activePlayers.length !== 16) {
+    return false;
+  }
+  
+  // Check if all players are same gender
+  const genders = [...new Set(activePlayers.map(p => p.gender))];
+  if (genders.length !== 1) {
+    return false;
+  }
+  
+  // Check if all players are same grade
+  const grades = [...new Set(activePlayers.map(p => p.grade))];
+  if (grades.length !== 1) {
+    return false;
+  }
+  
+  log("=== PERFECT 16 DETECTED ===");
+  log("16 players, all " + genders[0] + ", all grade " + translateGrade(grades[0]));
+  return true;
+}
+
 let selectedManualPlayers = [];
 let selectedCourt = null;
 let manualTeam1 = [];
@@ -2143,10 +2347,31 @@ function processMatchesWithManualSetup() {
 
 // Match generation functions (from original code)
 // Original processMatches function (for when no manual matches)
+
 function processMatches() {
+  
+// Check for Perfect 16 first
+  if (detectPerfect16Scenario()) {
+    const perfect16Matches = generatePerfect16Matches(parseInt(document.getElementById('setNumberSelector').value));
+    if (perfect16Matches) {
+      // Apply court preferences to Perfect 16 matches
+      const courtOptimizedMatches = processCourtPreferences(currentData, perfect16Matches);
+      currentMatches = courtOptimizedMatches;
+      displayResults(currentData, courtOptimizedMatches);
+      return;
+    } else {
+const currentSetNum = parseInt(document.getElementById('setNumberSelector').value);
+    if (currentSetNum === 6) {
+        log("=== EXITING PERFECT 16 MODE - SWITCHING TO NORMAL ALGORITHMS ===");
+    }
+      log("Perfect 16 failed, falling back to normal algorithm");
+    }
+  }
+  
   log("=== STARTING MATCH FORMATION ===");
   
   const sortedData = sortPlayers(currentData);
+
   const matches = formMatchesStrict(sortedData);
   const balancedMatches = matches.map(match => balanceTeamsIfNeeded(match));
   const finalMatches = processCourtPreferences(sortedData, balancedMatches);
@@ -2170,6 +2395,20 @@ const competitiveMatches = fixUncompetitiveMatches(sortedData, opponentOptimized
 // New function for processing with adjusted data (after manual matches)
 
 function processMatchesWithAdjustedData(adjustedData) {
+  // Check for Perfect 16 first
+  if (detectPerfect16Scenario()) {
+    const perfect16Matches = generatePerfect16Matches(parseInt(document.getElementById('setNumberSelector').value));
+    if (perfect16Matches) {
+      // Apply court preferences to Perfect 16 matches
+      const courtOptimizedMatches = processCourtPreferences(currentData, perfect16Matches);
+      currentMatches = courtOptimizedMatches;
+      displayResults(currentData, courtOptimizedMatches);
+      return;
+    } else {
+      log("Perfect 16 failed, falling back to normal algorithm");
+    }
+  }
+  
   log("=== STARTING MATCH FORMATION (ADJUSTED FOR MANUAL MATCHES) ===");
   
   const sortedData = sortPlayers(adjustedData);
@@ -2192,82 +2431,43 @@ const competitiveMatches = fixUncompetitiveMatches(sortedData, opponentOptimized
   displayResults(currentData, individuallyBalancedMatches);
 }
 function sortPlayers(data) {
+  // Always start with grade-sorted lists
   const sortedMen = data.availableMen.sort((a, b) => b.grade - a.grade);
   const sortedWomen = data.availableWomen.sort((a, b) => b.grade - a.grade);
-  
- // Apply rotation for all sets after Set 1 to minimize repeat partnerships
 
+  // === Mixing step (toggle: A/B vs Torus) ===
+  const setNumber = parseInt(document.getElementById('setNumberSelector').value);
 
-// ------------------ TORUS DRIFT ROTATION (REPLACES odd/even weave) ------------------
-// A simple cyclic shift per set: set 1 -> drift 0 (no change), set 2 -> +1, set 3 -> +2, etc.
-const setNumber = parseInt(document.getElementById('setNumberSelector').value);
-
-// Cyclic shift on a ring (torus drift)
-function torusDrift(arr, drift) {
-  const n = arr.length;
-  if (n <= 1) return arr.slice();
-  // make drift positive and within [0, n-1]
-  const k = ((drift % n) + n) % n;
-  // rotate left by k
-  return arr.slice(k).concat(arr.slice(0, k));
-}
-
-if (setNumber > 1) {
-  // Use (setNumber - 1) so Set 1 has drift 0, Set 2 drift 1, Set 3 drift 2, etc.
-  const drift = setNumber - 1;
-
-  // Rotate MEN within each grade group
-  for (let grade = 5; grade >= 1; grade--) {
-    const indices = [];
-    const group = [];
-    for (let i = 0; i < sortedMen.length; i++) {
-      if (sortedMen[i].grade === grade) {
-        indices.push(i);
-        group.push(sortedMen[i]);
-      }
+  let mixedMen, mixedWomen;
+  if (MIXING_MODE === "ab-smart") {
+    mixedMen = mixABSmart(sortedMen.slice(), setNumber);
+    mixedWomen = mixABSmart(sortedWomen.slice(), setNumber);
+    log("Applied A/B Smart Mixing for Set " + setNumber);
+  } else {
+    // Torus drift fallback (only used if MIXING_MODE = "torus")
+    const drift = Math.max(0, setNumber - 1);
+    function rotatePlayersTorus(arr, drift) {
+      const n = arr.length; if (n <= 1) return arr.slice();
+      const k = ((drift % n) + n) % n;
+      return arr.slice(k).concat(arr.slice(0, k));
     }
-    if (group.length > 1) {
-      const rotated = torusDrift(group, drift);
-      for (let j = 0; j < indices.length; j++) {
-        sortedMen[indices[j]] = rotated[j];
-      }
-    }
+    mixedMen = rotatePlayersTorus(sortedMen.slice(), drift);
+    mixedWomen = rotatePlayersTorus(sortedWomen.slice(), drift);
+    log("Applied Torus Drift rotation (drift = " + drift + ") for Set " + setNumber);
   }
 
-  // Rotate WOMEN within each grade group
+  // Logging after mixing
+  log("=== SORTED PLAYERS (after mixing) ===");
   for (let grade = 5; grade >= 1; grade--) {
-    const indices = [];
-    const group = [];
-    for (let i = 0; i < sortedWomen.length; i++) {
-      if (sortedWomen[i].grade === grade) {
-        indices.push(i);
-        group.push(sortedWomen[i]);
-      }
-    }
-    if (group.length > 1) {
-      const rotated = torusDrift(group, drift);
-      for (let j = 0; j < indices.length; j++) {
-        sortedWomen[indices[j]] = rotated[j];
-      }
-    }
-  }
-
-  log("Applied Torus Drift rotation (drift = " + drift + ") for Set " + setNumber);
-} else {
-  log("No rotation applied for Set 1 (base set)");
-}
-// ------------------ END TORUS DRIFT ROTATION ------------------
-
-  log("=== SORTED PLAYERS ===");
-  for (let grade = 5; grade >= 1; grade--) {
-    const menCount = sortedMen.filter(p => p.grade === grade).length;
-    const womenCount = sortedWomen.filter(p => p.grade === grade).length;
+    const menCount = mixedMen.filter(p => p.grade === grade).length;
+    const womenCount = mixedWomen.filter(p => p.grade === grade).length;
     if (menCount > 0 || womenCount > 0) {
       log("Grade " + grade + ": " + menCount + " men, " + womenCount + " women");
     }
   }
 
-  return { ...data, sortedMen, sortedWomen };
+  // Return with mixed lists
+  return { ...data, sortedMen: mixedMen, sortedWomen: mixedWomen };
 }
 
 function formMatchesStrict(data) {
@@ -2877,15 +3077,20 @@ function processCourtPreferences(data, matches) {
     return courtStr && (courtStr.startsWith('G') || (!courtStr.startsWith('H') && /^\d+$/.test(courtStr)));
   };
   
-  const hasNHCPlayer = (match) => {
-    const allPlayers = [...match.team1, ...match.team2];
-    return allPlayers.some(player => {
-      const menPlayer = data.sortedMen.find(p => p.name === player.name);
-      const womenPlayer = data.sortedWomen.find(p => p.name === player.name);
-      const foundPlayer = menPlayer || womenPlayer;
-      return foundPlayer && foundPlayer.nhc;
-    });
-  };
+ const hasNHCPlayer = (match) => {
+  const allPlayers = [...match.team1, ...match.team2];
+  return allPlayers.some(player => {
+    const menPlayer = data.sortedMen ? data.sortedMen.find(p => p.name === player.name) : null;
+    const womenPlayer = data.sortedWomen ? data.sortedWomen.find(p => p.name === player.name) : null;
+    
+    // If not found in sorted arrays, check available arrays
+    const menPlayerAvailable = !menPlayer && data.availableMen ? data.availableMen.find(p => p.name === player.name) : null;
+    const womenPlayerAvailable = !womenPlayer && data.availableWomen ? data.availableWomen.find(p => p.name === player.name) : null;
+    
+    const foundPlayer = menPlayer || womenPlayer || menPlayerAvailable || womenPlayerAvailable;
+    return foundPlayer && foundPlayer.nhc;
+  });
+};
   
   const nhcOnHard = [];
   const nonNhcOnGrass = [];
@@ -4662,12 +4867,7 @@ console.log("Final imported courts:", importedCourts);
     // Sort courts by priority
     importedCourts.sort((a, b) => a.priority - b.priority);
     
-    // Ask user if they want to replace existing data
-    const message = `Found ${importedPlayers.length} players and ${importedCourts.length} courts.\n\nReplace existing data?`;
-    if (!confirm(message)) {
-      e.target.value = ''; // Clear file input
-      return;
-    }
+    
     
     // Clear existing data
     playerRows = [];
@@ -4703,7 +4903,9 @@ availableCourts.forEach(court => {
     updateProceedButton();
     
     // Show success message
-    alert(`Successfully imported:\n• ${importedPlayers.length} players\n• ${importedCourts.length} courts`);
+// Show success message in the status area
+document.getElementById('memberLoadStatus').innerHTML = 
+  `<div class="success">✓ Imported ${importedPlayers.length} players and ${importedCourts.length} courts from Excel file</div>`;
     
     // Auto-save the imported data
     saveDataToStorage();
@@ -4769,7 +4971,7 @@ function refreshPlayerTable() {
 }
 
 </script>
-<button onclick="clearSavedData()" class="clear-data-btn" title="Clear all saved data">Clear Saved Data</button>
+
 </body>
 </html>
         
