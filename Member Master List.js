@@ -1,11 +1,11 @@
 // Tennis Club Member Master List
-// Generated on: 05/09/2025, 11:26:51
-// Total Members: 208
+// Generated on: 05/09/2025, 21:24:43
+// Total Members: 216
 
 const MEMBERS = [
   {
     name: "Adrian Taylor",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -13,7 +13,7 @@ const MEMBERS = [
   },
   {
     name: "Agathe Leroux",
-    grade: 2,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -21,7 +21,7 @@ const MEMBERS = [
   },
   {
     name: "Allan Blakeney",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -29,7 +29,7 @@ const MEMBERS = [
   },
   {
     name: "Allan Wall",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -37,7 +37,7 @@ const MEMBERS = [
   },
   {
     name: "Alwyn Vear",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -45,7 +45,7 @@ const MEMBERS = [
   },
   {
     name: "Amanda McGregor",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -53,7 +53,7 @@ const MEMBERS = [
   },
   {
     name: "Amy Oen",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -61,7 +61,7 @@ const MEMBERS = [
   },
   {
     name: "Andrew Davey",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -69,7 +69,7 @@ const MEMBERS = [
   },
   {
     name: "Andrew Gaby",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -77,7 +77,7 @@ const MEMBERS = [
   },
   {
     name: "Andrew Walsh",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -85,7 +85,7 @@ const MEMBERS = [
   },
   {
     name: "Angela Philipson",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -93,7 +93,7 @@ const MEMBERS = [
   },
   {
     name: "Angus Plummer",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -101,7 +101,7 @@ const MEMBERS = [
   },
   {
     name: "Anke Goldschmidt",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -109,7 +109,7 @@ const MEMBERS = [
   },
   {
     name: "Anna Buhisan",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -117,7 +117,7 @@ const MEMBERS = [
   },
   {
     name: "Anne Casson",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -125,7 +125,7 @@ const MEMBERS = [
   },
   {
     name: "Anne Williams",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -133,7 +133,7 @@ const MEMBERS = [
   },
   {
     name: "Annie Sullivan",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -141,7 +141,7 @@ const MEMBERS = [
   },
   {
     name: "Anthony Kain",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -149,7 +149,7 @@ const MEMBERS = [
   },
   {
     name: "Augustine Boima",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -157,15 +157,23 @@ const MEMBERS = [
   },
   {
     name: "Belinda Leclezio",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
     plusMinus: ""
   },
   {
+    name: "Ben Loader",
+    grade: "2",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Ben Luscombe",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -173,7 +181,7 @@ const MEMBERS = [
   },
   {
     name: "Bob Anderson",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -181,7 +189,7 @@ const MEMBERS = [
   },
   {
     name: "Bret White",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -189,7 +197,7 @@ const MEMBERS = [
   },
   {
     name: "Brett Armstrong",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -197,7 +205,7 @@ const MEMBERS = [
   },
   {
     name: "Brett Robertson",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -205,7 +213,7 @@ const MEMBERS = [
   },
   {
     name: "Brian Cooper",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -213,15 +221,23 @@ const MEMBERS = [
   },
   {
     name: "Brian Page",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
     plusMinus: "-"
   },
   {
+    name: "Brian Scott",
+    grade: "2A",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Brian Sova",
-    grade: 1,
+    grade: "3A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -229,7 +245,7 @@ const MEMBERS = [
   },
   {
     name: "Bruce Gregory",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -237,15 +253,23 @@ const MEMBERS = [
   },
   {
     name: "Bruce Michelly",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
     plusMinus: "+"
   },
   {
+    name: "Bue Jensen",
+    grade: "2B",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Cam McGreggor",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -253,7 +277,7 @@ const MEMBERS = [
   },
   {
     name: "Capucine Flipo",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -261,7 +285,7 @@ const MEMBERS = [
   },
   {
     name: "Carmel Wright",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -269,7 +293,7 @@ const MEMBERS = [
   },
   {
     name: "Carolyn Hogan",
-    grade: 2,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -277,7 +301,7 @@ const MEMBERS = [
   },
   {
     name: "Cathy Harper",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -285,7 +309,7 @@ const MEMBERS = [
   },
   {
     name: "Cheryl Hoskins",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -293,7 +317,7 @@ const MEMBERS = [
   },
   {
     name: "Chris Kruk",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -301,7 +325,7 @@ const MEMBERS = [
   },
   {
     name: "Chris McSweeney",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -309,7 +333,7 @@ const MEMBERS = [
   },
   {
     name: "Chris Reyboz",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -317,7 +341,7 @@ const MEMBERS = [
   },
   {
     name: "Chris Smethurst",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -325,7 +349,7 @@ const MEMBERS = [
   },
   {
     name: "Christina Cabrera",
-    grade: 2,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -333,7 +357,7 @@ const MEMBERS = [
   },
   {
     name: "Clair Medhurst",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -341,7 +365,7 @@ const MEMBERS = [
   },
   {
     name: "Clare Haslam",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -349,7 +373,7 @@ const MEMBERS = [
   },
   {
     name: "Clare Reyboz",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -357,7 +381,7 @@ const MEMBERS = [
   },
   {
     name: "Clem Addis",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -365,7 +389,7 @@ const MEMBERS = [
   },
   {
     name: "Colin Barnett",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -373,7 +397,7 @@ const MEMBERS = [
   },
   {
     name: "Colin Relf",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -381,7 +405,15 @@ const MEMBERS = [
   },
   {
     name: "Cory Andrusiw",
-    grade: 3,
+    grade: "2B",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Craig (M)",
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -389,7 +421,7 @@ const MEMBERS = [
   },
   {
     name: "Craig Ellis",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -397,7 +429,7 @@ const MEMBERS = [
   },
   {
     name: "Craig Herkes",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -405,7 +437,15 @@ const MEMBERS = [
   },
   {
     name: "Craig Palmer",
-    grade: 5,
+    grade: "2",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Craig Tweedie",
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -413,7 +453,7 @@ const MEMBERS = [
   },
   {
     name: "Dai Williams",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -421,7 +461,7 @@ const MEMBERS = [
   },
   {
     name: "David Burge",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -429,7 +469,7 @@ const MEMBERS = [
   },
   {
     name: "David Chadwick",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -437,7 +477,7 @@ const MEMBERS = [
   },
   {
     name: "David Coffey",
-    grade: 1,
+    grade: "3A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -445,7 +485,7 @@ const MEMBERS = [
   },
   {
     name: "David Goldschmidt",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -453,7 +493,7 @@ const MEMBERS = [
   },
   {
     name: "David Howe",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -461,7 +501,7 @@ const MEMBERS = [
   },
   {
     name: "David Peterson",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -469,7 +509,7 @@ const MEMBERS = [
   },
   {
     name: "David Sheridan",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -477,7 +517,7 @@ const MEMBERS = [
   },
   {
     name: "David Spearman",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -485,7 +525,15 @@ const MEMBERS = [
   },
   {
     name: "David Thomas",
-    grade: 1,
+    grade: "3A",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Declan Cahill",
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -493,7 +541,7 @@ const MEMBERS = [
   },
   {
     name: "Derek Walker",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -501,7 +549,7 @@ const MEMBERS = [
   },
   {
     name: "Dinah Terry",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -509,7 +557,7 @@ const MEMBERS = [
   },
   {
     name: "Ed Trembath",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -517,7 +565,7 @@ const MEMBERS = [
   },
   {
     name: "Ellen Morrissey",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -525,7 +573,7 @@ const MEMBERS = [
   },
   {
     name: "Eric Lilford",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -533,7 +581,7 @@ const MEMBERS = [
   },
   {
     name: "Frederic Chauveau",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -541,7 +589,7 @@ const MEMBERS = [
   },
   {
     name: "Frederick Flipo",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -549,7 +597,7 @@ const MEMBERS = [
   },
   {
     name: "Gary  Giblett",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -557,7 +605,7 @@ const MEMBERS = [
   },
   {
     name: "Gary Bretnall",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -565,7 +613,7 @@ const MEMBERS = [
   },
   {
     name: "Gary Karlson",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -573,7 +621,7 @@ const MEMBERS = [
   },
   {
     name: "Gavan Sullivan",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -581,7 +629,15 @@ const MEMBERS = [
   },
   {
     name: "Grant O'Connell",
-    grade: 3,
+    grade: "2B",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Greg Harvey",
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -589,7 +645,7 @@ const MEMBERS = [
   },
   {
     name: "Greg Smith",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -597,7 +653,7 @@ const MEMBERS = [
   },
   {
     name: "Greig Smith",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -605,7 +661,7 @@ const MEMBERS = [
   },
   {
     name: "Greta Ollerearnshaw",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -613,7 +669,7 @@ const MEMBERS = [
   },
   {
     name: "Guy Leclezio",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -621,7 +677,7 @@ const MEMBERS = [
   },
   {
     name: "Gwen Willox",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -629,7 +685,7 @@ const MEMBERS = [
   },
   {
     name: "Helen Walker",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -637,7 +693,7 @@ const MEMBERS = [
   },
   {
     name: "Ian Hay",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -645,7 +701,7 @@ const MEMBERS = [
   },
   {
     name: "Ian Hutton",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -653,7 +709,7 @@ const MEMBERS = [
   },
   {
     name: "Ian James",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -661,7 +717,7 @@ const MEMBERS = [
   },
   {
     name: "Ian Middlemass",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -669,7 +725,7 @@ const MEMBERS = [
   },
   {
     name: "Jack Ashby",
-    grade: 1,
+    grade: "3A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -677,7 +733,7 @@ const MEMBERS = [
   },
   {
     name: "Jack Harrison",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -685,7 +741,7 @@ const MEMBERS = [
   },
   {
     name: "James Middlweek",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -693,7 +749,7 @@ const MEMBERS = [
   },
   {
     name: "Jan Hutton",
-    grade: 3,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -701,7 +757,7 @@ const MEMBERS = [
   },
   {
     name: "Jan Muggleton",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -709,7 +765,7 @@ const MEMBERS = [
   },
   {
     name: "Jane Khan",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -717,7 +773,7 @@ const MEMBERS = [
   },
   {
     name: "Jane Ward",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -725,7 +781,7 @@ const MEMBERS = [
   },
   {
     name: "Janet Andrusiw",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -733,7 +789,7 @@ const MEMBERS = [
   },
   {
     name: "Jay Weatherill",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -741,7 +797,7 @@ const MEMBERS = [
   },
   {
     name: "Jenny Sheridan",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -749,7 +805,7 @@ const MEMBERS = [
   },
   {
     name: "Jenny Spearman",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -757,7 +813,7 @@ const MEMBERS = [
   },
   {
     name: "Jo Dawkins",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -765,7 +821,7 @@ const MEMBERS = [
   },
   {
     name: "Jo Keaney",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -773,7 +829,7 @@ const MEMBERS = [
   },
   {
     name: "John Dowson",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -781,7 +837,7 @@ const MEMBERS = [
   },
   {
     name: "John Gardner",
-    grade: 1,
+    grade: "3A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -789,7 +845,7 @@ const MEMBERS = [
   },
   {
     name: "John Gillett",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: true,
     nxd: false,
@@ -797,7 +853,7 @@ const MEMBERS = [
   },
   {
     name: "John Stockwell",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -805,7 +861,7 @@ const MEMBERS = [
   },
   {
     name: "Jonathan Marlow",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -813,7 +869,7 @@ const MEMBERS = [
   },
   {
     name: "Josh Pitt",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -821,7 +877,7 @@ const MEMBERS = [
   },
   {
     name: "Jude James",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -829,7 +885,7 @@ const MEMBERS = [
   },
   {
     name: "Judy Curran",
-    grade: 2,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -837,7 +893,7 @@ const MEMBERS = [
   },
   {
     name: "Judy Dusevich",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -845,7 +901,7 @@ const MEMBERS = [
   },
   {
     name: "Judy Watt",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -853,7 +909,7 @@ const MEMBERS = [
   },
   {
     name: "Julian Hubble",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -861,7 +917,7 @@ const MEMBERS = [
   },
   {
     name: "Julie Howe",
-    grade: 2,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -869,7 +925,7 @@ const MEMBERS = [
   },
   {
     name: "Juliet Smith",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -877,7 +933,7 @@ const MEMBERS = [
   },
   {
     name: "Karen Parfitt",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -885,7 +941,7 @@ const MEMBERS = [
   },
   {
     name: "Karen Simmer",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -893,7 +949,7 @@ const MEMBERS = [
   },
   {
     name: "Katrina Chisholm",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -901,7 +957,7 @@ const MEMBERS = [
   },
   {
     name: "Ken Adam",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -909,7 +965,7 @@ const MEMBERS = [
   },
   {
     name: "Ken Everett",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -917,7 +973,7 @@ const MEMBERS = [
   },
   {
     name: "Ken Gotfried",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -925,7 +981,7 @@ const MEMBERS = [
   },
   {
     name: "Ken Hogan",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -933,7 +989,7 @@ const MEMBERS = [
   },
   {
     name: "Kevin Chatfield",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -941,7 +997,7 @@ const MEMBERS = [
   },
   {
     name: "Kim Briedahl",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -949,7 +1005,7 @@ const MEMBERS = [
   },
   {
     name: "Kim Morgan",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -957,7 +1013,7 @@ const MEMBERS = [
   },
   {
     name: "Kirstin Prendiville",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -965,7 +1021,7 @@ const MEMBERS = [
   },
   {
     name: "Kyle Hoath",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -973,7 +1029,7 @@ const MEMBERS = [
   },
   {
     name: "Laurence Pace",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -981,7 +1037,7 @@ const MEMBERS = [
   },
   {
     name: "Lee Mather",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -989,7 +1045,7 @@ const MEMBERS = [
   },
   {
     name: "Leeann Lamotte",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -997,7 +1053,7 @@ const MEMBERS = [
   },
   {
     name: "Liz Peterson",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1005,15 +1061,23 @@ const MEMBERS = [
   },
   {
     name: "Lorrainne Bossie",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
     plusMinus: ""
   },
   {
+    name: "Luiz visitor",
+    grade: "2B",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Lynne Woodland",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1021,7 +1085,7 @@ const MEMBERS = [
   },
   {
     name: "Marco Clay",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1029,7 +1093,7 @@ const MEMBERS = [
   },
   {
     name: "Mark Lewis",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1037,7 +1101,7 @@ const MEMBERS = [
   },
   {
     name: "Mark Waring",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1045,7 +1109,7 @@ const MEMBERS = [
   },
   {
     name: "Mary Sullivan",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1053,7 +1117,7 @@ const MEMBERS = [
   },
   {
     name: "Matt MacFarlane",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1061,7 +1125,7 @@ const MEMBERS = [
   },
   {
     name: "Matt Schlapfer",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1069,7 +1133,7 @@ const MEMBERS = [
   },
   {
     name: "Meikle Meecham",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1077,7 +1141,7 @@ const MEMBERS = [
   },
   {
     name: "Merv Hardie",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1085,7 +1149,7 @@ const MEMBERS = [
   },
   {
     name: "Michael Clifford",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1093,7 +1157,7 @@ const MEMBERS = [
   },
   {
     name: "Michael Cusack",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1101,7 +1165,7 @@ const MEMBERS = [
   },
   {
     name: "Michael Gibbons",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1109,7 +1173,7 @@ const MEMBERS = [
   },
   {
     name: "Michael Pugh",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1117,7 +1181,7 @@ const MEMBERS = [
   },
   {
     name: "Michelle Atkins",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1125,7 +1189,7 @@ const MEMBERS = [
   },
   {
     name: "Michelle Karlson",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1133,7 +1197,7 @@ const MEMBERS = [
   },
   {
     name: "Mike Green",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1141,7 +1205,7 @@ const MEMBERS = [
   },
   {
     name: "Moira Dobson",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1149,7 +1213,7 @@ const MEMBERS = [
   },
   {
     name: "Monique Chauveau",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1157,7 +1221,7 @@ const MEMBERS = [
   },
   {
     name: "Murray Frieberg",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1165,7 +1229,7 @@ const MEMBERS = [
   },
   {
     name: "Nicola Valentine",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1173,7 +1237,7 @@ const MEMBERS = [
   },
   {
     name: "Pam Morley",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1181,7 +1245,7 @@ const MEMBERS = [
   },
   {
     name: "Paul Carter",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1189,7 +1253,7 @@ const MEMBERS = [
   },
   {
     name: "Paul Oen",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1197,7 +1261,7 @@ const MEMBERS = [
   },
   {
     name: "Paul Southam",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1205,7 +1269,7 @@ const MEMBERS = [
   },
   {
     name: "Peter Blake",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1213,7 +1277,7 @@ const MEMBERS = [
   },
   {
     name: "Peter Cartwright",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1221,7 +1285,7 @@ const MEMBERS = [
   },
   {
     name: "Peter French",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1229,7 +1293,7 @@ const MEMBERS = [
   },
   {
     name: "Peter Getgood",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1237,7 +1301,7 @@ const MEMBERS = [
   },
   {
     name: "Peter Hector",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1245,7 +1309,7 @@ const MEMBERS = [
   },
   {
     name: "Peter Moullin",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1253,7 +1317,7 @@ const MEMBERS = [
   },
   {
     name: "Peter Odea",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1261,7 +1325,7 @@ const MEMBERS = [
   },
   {
     name: "Peter Oman",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1269,7 +1333,7 @@ const MEMBERS = [
   },
   {
     name: "Phil Tissiman",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1277,7 +1341,7 @@ const MEMBERS = [
   },
   {
     name: "Philip Newton",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1285,7 +1349,7 @@ const MEMBERS = [
   },
   {
     name: "Pierre Murat",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1293,7 +1357,7 @@ const MEMBERS = [
   },
   {
     name: "Rachel Schairer",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1301,7 +1365,7 @@ const MEMBERS = [
   },
   {
     name: "Rachel Thomas",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1309,7 +1373,7 @@ const MEMBERS = [
   },
   {
     name: "Ralph Straton",
-    grade: 1,
+    grade: "3A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1317,7 +1381,7 @@ const MEMBERS = [
   },
   {
     name: "Ramesh Anbanantham",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1325,7 +1389,7 @@ const MEMBERS = [
   },
   {
     name: "Remo Pollastre",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1333,7 +1397,7 @@ const MEMBERS = [
   },
   {
     name: "Riaz Khan",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1341,7 +1405,7 @@ const MEMBERS = [
   },
   {
     name: "Richard Atkins",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1349,7 +1413,7 @@ const MEMBERS = [
   },
   {
     name: "Richard Drake-Brockman",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1357,7 +1421,7 @@ const MEMBERS = [
   },
   {
     name: "Richard Lee",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1365,7 +1429,7 @@ const MEMBERS = [
   },
   {
     name: "Rick Bretnall",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1373,7 +1437,7 @@ const MEMBERS = [
   },
   {
     name: "Rick Cullen",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1381,7 +1445,7 @@ const MEMBERS = [
   },
   {
     name: "Rob Wilde",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1389,7 +1453,7 @@ const MEMBERS = [
   },
   {
     name: "Rob Wilson",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1397,7 +1461,7 @@ const MEMBERS = [
   },
   {
     name: "Robbie Burns",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1405,7 +1469,7 @@ const MEMBERS = [
   },
   {
     name: "Rodney Udall",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1413,7 +1477,7 @@ const MEMBERS = [
   },
   {
     name: "Rosemarie Cooper",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1421,7 +1485,7 @@ const MEMBERS = [
   },
   {
     name: "Ruth Luyer",
-    grade: 3,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1429,7 +1493,7 @@ const MEMBERS = [
   },
   {
     name: "Ruth Maitland",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1437,7 +1501,7 @@ const MEMBERS = [
   },
   {
     name: "Sadna Maroo",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1445,7 +1509,7 @@ const MEMBERS = [
   },
   {
     name: "Sallee Eyres",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1453,7 +1517,7 @@ const MEMBERS = [
   },
   {
     name: "Sally Rossen",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1461,7 +1525,7 @@ const MEMBERS = [
   },
   {
     name: "Shane Bannister-Jones",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1469,7 +1533,7 @@ const MEMBERS = [
   },
   {
     name: "Sheena Storm",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1477,7 +1541,7 @@ const MEMBERS = [
   },
   {
     name: "Simon Storm",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1485,7 +1549,7 @@ const MEMBERS = [
   },
   {
     name: "Simon Walsh",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1493,7 +1557,7 @@ const MEMBERS = [
   },
   {
     name: "Stephen Daly",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1501,7 +1565,7 @@ const MEMBERS = [
   },
   {
     name: "Steve Ollerearnshaw",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1509,7 +1573,7 @@ const MEMBERS = [
   },
   {
     name: "Steve Watt",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1517,7 +1581,7 @@ const MEMBERS = [
   },
   {
     name: "Sue Dibb",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1525,7 +1589,7 @@ const MEMBERS = [
   },
   {
     name: "Sue Guttmann",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1533,7 +1597,7 @@ const MEMBERS = [
   },
   {
     name: "Sue Saraceni",
-    grade: 2,
+    grade: "3",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1541,7 +1605,7 @@ const MEMBERS = [
   },
   {
     name: "Sue Ward",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1549,7 +1613,7 @@ const MEMBERS = [
   },
   {
     name: "Suzanne Lemmey",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1557,7 +1621,7 @@ const MEMBERS = [
   },
   {
     name: "Teena McDougall",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1565,7 +1629,7 @@ const MEMBERS = [
   },
   {
     name: "Thelma Furlong",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1573,7 +1637,7 @@ const MEMBERS = [
   },
   {
     name: "Tim D'Arcy",
-    grade: 2,
+    grade: "3",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1581,7 +1645,7 @@ const MEMBERS = [
   },
   {
     name: "Tim Johnston",
-    grade: 5,
+    grade: "2",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1589,7 +1653,7 @@ const MEMBERS = [
   },
   {
     name: "Vanessa Ellis",
-    grade: 5,
+    grade: "2",
     gender: "F",
     nhc: true,
     nxd: false,
@@ -1597,7 +1661,7 @@ const MEMBERS = [
   },
   {
     name: "Veronica Morrissey",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1605,7 +1669,7 @@ const MEMBERS = [
   },
   {
     name: "Vic Bruce",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1613,7 +1677,7 @@ const MEMBERS = [
   },
   {
     name: "Visitor 1",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1621,7 +1685,7 @@ const MEMBERS = [
   },
   {
     name: "Visitor 2",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1629,7 +1693,7 @@ const MEMBERS = [
   },
   {
     name: "Visitor 3",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1637,7 +1701,7 @@ const MEMBERS = [
   },
   {
     name: "Visitor 4",
-    grade: 3,
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1645,7 +1709,7 @@ const MEMBERS = [
   },
   {
     name: "Wade Miklavs",
-    grade: 4,
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1653,7 +1717,7 @@ const MEMBERS = [
   },
   {
     name: "Wendy Price",
-    grade: 3,
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1661,7 +1725,7 @@ const MEMBERS = [
   },
   {
     name: "Wendy Yeo",
-    grade: 4,
+    grade: "2A",
     gender: "F",
     nhc: false,
     nxd: false,
