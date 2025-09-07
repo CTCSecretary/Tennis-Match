@@ -1,6 +1,6 @@
 // Tennis Club Member Master List
-// Generated on: 05/09/2025, 21:24:43
-// Total Members: 216
+// Generated on: 06/09/2025, 12:14:16
+// Total Members: 218
 
 const MEMBERS = [
   {
@@ -308,7 +308,7 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
-    name: "Cheryl Hoskins",
+    name: "Cheryl Hoskin",
     grade: "2A",
     gender: "F",
     nhc: false,
@@ -429,6 +429,14 @@ const MEMBERS = [
   },
   {
     name: "Craig Herkes",
+    grade: "2",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Craig M",
     grade: "2",
     gender: "M",
     nhc: false,
@@ -751,7 +759,7 @@ const MEMBERS = [
     name: "Jan Hutton",
     grade: "3",
     gender: "F",
-    nhc: false,
+    nhc: true,
     nxd: false,
     plusMinus: ""
   },
@@ -855,7 +863,7 @@ const MEMBERS = [
     name: "John Stockwell",
     grade: "2B",
     gender: "M",
-    nhc: false,
+    nhc: true,
     nxd: false,
     plusMinus: "+"
   },
@@ -1164,6 +1172,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Michael Gibbon",
+    grade: "2A",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Michael Gibbons",
     grade: "2A",
     gender: "M",
@@ -1415,7 +1431,7 @@ const MEMBERS = [
     name: "Richard Drake-Brockman",
     grade: "2A",
     gender: "M",
-    nhc: false,
+    nhc: true,
     nxd: false,
     plusMinus: ""
   },
@@ -1671,7 +1687,7 @@ const MEMBERS = [
     name: "Vic Bruce",
     grade: "2A",
     gender: "M",
-    nhc: false,
+    nhc: true,
     nxd: false,
     plusMinus: "+"
   },
