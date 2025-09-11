@@ -1,5 +1,5 @@
 // Tennis Club Member Master List
-// Generated on: 06/09/2025, 12:14:16
+// Generated on: 11/09/2025, 18:35:34
 // Total Members: 218
 
 const MEMBERS = [
@@ -25,7 +25,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Allan Wall",
@@ -73,7 +73,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Andrew Walsh",
@@ -185,7 +185,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Bret White",
@@ -345,7 +345,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: "-"
+    plusMinus: ""
   },
   {
     name: "Christina Cabrera",
@@ -425,7 +425,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Craig Herkes",
@@ -449,7 +449,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Craig Tweedie",
@@ -625,7 +625,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Gavan Sullivan",
@@ -857,7 +857,7 @@ const MEMBERS = [
     gender: "M",
     nhc: true,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "John Stockwell",
@@ -921,7 +921,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: "-"
+    plusMinus: ""
   },
   {
     name: "Julie Howe",
@@ -977,7 +977,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Ken Gotfried",
@@ -1105,7 +1105,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Mark Waring",
@@ -1241,7 +1241,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Nicola Valentine",
@@ -1337,7 +1337,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Peter Oman",
@@ -1361,7 +1361,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Pierre Murat",
@@ -1417,7 +1417,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Richard Atkins",
