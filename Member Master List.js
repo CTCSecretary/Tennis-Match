@@ -1,5 +1,5 @@
 // Tennis Club Member Master List
-// Generated on: 12/09/2025, 13:26:03
+// Generated on: 12/09/2025, 13:53:54
 // Total Members: 218
 
 const MEMBERS = [
@@ -249,7 +249,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Bruce Michelly",
@@ -337,7 +337,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Chris Smethurst",
@@ -1369,7 +1369,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Rachel Schairer",
@@ -1409,7 +1409,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Riaz Khan",
