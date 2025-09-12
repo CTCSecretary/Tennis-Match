@@ -1,5 +1,5 @@
 // Tennis Club Member Master List
-// Generated on: 11/09/2025, 18:35:34
+// Generated on: 12/09/2025, 13:26:03
 // Total Members: 218
 
 const MEMBERS = [
@@ -37,11 +37,11 @@ const MEMBERS = [
   },
   {
     name: "Alwyn Vear",
-    grade: "2",
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: "-"
+    plusMinus: "+"
   },
   {
     name: "Amanda McGregor",
@@ -345,7 +345,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Christina Cabrera",
@@ -921,7 +921,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Julie Howe",
@@ -1608,7 +1608,7 @@ const MEMBERS = [
     grade: "2A",
     gender: "F",
     nhc: false,
-    nxd: false,
+    nxd: true,
     plusMinus: ""
   },
   {
