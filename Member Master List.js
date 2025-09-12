@@ -1,6 +1,6 @@
 // Tennis Club Member Master List
-// Generated on: 12/09/2025, 13:53:54
-// Total Members: 218
+// Generated on: 12/09/2025, 17:11:53
+// Total Members: 220
 
 const MEMBERS = [
   {
@@ -49,7 +49,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Amy Oen",
@@ -89,7 +89,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Angus Plummer",
@@ -129,7 +129,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Annie Sullivan",
@@ -137,7 +137,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Anthony Kain",
@@ -154,6 +154,14 @@ const MEMBERS = [
     nhc: false,
     nxd: false,
     plusMinus: ""
+  },
+  {
+    name: "Belinda Hansen",
+    grade: "2B",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: "+"
   },
   {
     name: "Belinda Leclezio",
@@ -297,7 +305,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Cathy Harper",
@@ -313,7 +321,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Chris Kruk",
@@ -369,7 +377,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Clare Reyboz",
@@ -777,7 +785,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Jane Ward",
@@ -785,7 +793,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Janet Andrusiw",
@@ -817,7 +825,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Jo Dawkins",
@@ -825,7 +833,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Jo Keaney",
@@ -884,6 +892,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Joy Gilmore",
+    grade: "2B",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: "+"
+  },
+  {
     name: "Jude James",
     grade: "2",
     gender: "F",
@@ -913,7 +929,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Julian Hubble",
@@ -953,7 +969,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Katrina Chisholm",
@@ -1121,7 +1137,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Matt MacFarlane",
@@ -1209,7 +1225,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Mike Green",
@@ -1233,7 +1249,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Murray Frieberg",
@@ -1249,7 +1265,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Pam Morley",
@@ -1257,7 +1273,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Paul Carter",
@@ -1497,7 +1513,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Ruth Luyer",
@@ -1545,7 +1561,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Sheena Storm",
@@ -1633,7 +1649,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "+"
   },
   {
     name: "Teena McDougall",
@@ -1649,7 +1665,7 @@ const MEMBERS = [
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Tim D'Arcy",
