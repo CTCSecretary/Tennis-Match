@@ -1,6 +1,6 @@
 // Tennis Club Member Master List
-// Generated on: 12/09/2025, 17:11:53
-// Total Members: 220
+// Generated on: 13/09/2025, 16:44:45
+// Total Members: 221
 
 const MEMBERS = [
   {
@@ -725,7 +725,7 @@ const MEMBERS = [
   },
   {
     name: "Ian James",
-    grade: "3",
+    grade: "2B",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1001,7 +1001,7 @@ const MEMBERS = [
     gender: "M",
     nhc: false,
     nxd: false,
-    plusMinus: ""
+    plusMinus: "-"
   },
   {
     name: "Ken Hogan",
@@ -1527,6 +1527,14 @@ const MEMBERS = [
     name: "Ruth Maitland",
     grade: "2B",
     gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Ryan Binedell",
+    grade: "2",
+    gender: "M",
     nhc: false,
     nxd: false,
     plusMinus: ""
