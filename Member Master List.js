@@ -863,7 +863,7 @@ const MEMBERS = [
     name: "John Gardner",
     grade: "3A",
     gender: "M",
-    nhc: false,
+    nhc:  true,
     nxd: false,
     plusMinus: ""
   },
