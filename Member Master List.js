@@ -855,7 +855,7 @@ const MEMBERS = [
     name: "John Dowson",
     grade: "2A",
     gender: "M",
-    nhc: false,
+    nhc: true,
     nxd: false,
     plusMinus: "-"
   },
@@ -863,7 +863,7 @@ const MEMBERS = [
     name: "John Gardner",
     grade: "3A",
     gender: "M",
-    nhc:  true,
+    nhc: false,
     nxd: false,
     plusMinus: ""
   },
@@ -1100,7 +1100,7 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
-    name: "Lynne Woodland",
+    name: "Lyne Woodland",
     grade: "2",
     gender: "F",
     nhc: false,
