@@ -1,6 +1,6 @@
 // Tennis Club Member Master List
-// Generated on: 25/09/2025, 16:31:12
-// Total Members: 221
+// Generated on: 14/10/2025, 14:19:57
+// Total Members: 230
 
 const MEMBERS = [
   {
@@ -15,6 +15,22 @@ const MEMBERS = [
     name: "Agathe Leroux",
     grade: "3",
     gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Aiden Nguyen",
+    grade: "2B",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Alex Flynn",
+    grade: "2B",
+    gender: "M",
     nhc: false,
     nxd: false,
     plusMinus: ""
@@ -716,6 +732,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Henry Willis",
+    grade: "2",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Ian Hay",
     grade: "2B",
     gender: "M",
@@ -916,6 +940,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Judi Coffey",
+    grade: "2B",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Judy Curran",
     grade: "3",
     gender: "F",
@@ -973,11 +1005,19 @@ const MEMBERS = [
   },
   {
     name: "Karen Simmer",
+    grade: "2A",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Karin Hoal",
     grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
-    plusMinus: "+"
+    plusMinus: ""
   },
   {
     name: "Katrina Chisholm",
@@ -1085,7 +1125,7 @@ const MEMBERS = [
   },
   {
     name: "Liz Peterson",
-    grade: "2A",
+    grade: "2",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1404,6 +1444,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Rahil Ajmera",
+    grade: "2B",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Ralph Straton",
     grade: "3A",
     gender: "M",
@@ -1564,6 +1612,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Sarah Stretton",
+    grade: "2",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Shane Bannister-Jones",
     grade: "2A",
     gender: "F",
@@ -1590,6 +1646,14 @@ const MEMBERS = [
   {
     name: "Simon Walsh",
     grade: "2B",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Simon Weinberg",
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -1658,6 +1722,14 @@ const MEMBERS = [
     nhc: true,
     nxd: false,
     plusMinus: "+"
+  },
+  {
+    name: "Taryn Miles",
+    grade: "2B",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
   },
   {
     name: "Teena McDougall",
