@@ -1,6 +1,6 @@
 // Tennis Club Member Master List
-// Generated on: 14/10/2025, 14:19:57
-// Total Members: 230
+// Generated on: 15/10/2025, 10:55:25
+// Total Members: 236
 
 const MEMBERS = [
   {
@@ -21,7 +21,7 @@ const MEMBERS = [
   },
   {
     name: "Aiden Nguyen",
-    grade: "2B",
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -29,7 +29,7 @@ const MEMBERS = [
   },
   {
     name: "Alex Flynn",
-    grade: "2B",
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
@@ -317,6 +317,14 @@ const MEMBERS = [
   },
   {
     name: "Carmel Wright",
+    grade: "2B",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Caroline Werner",
     grade: "2B",
     gender: "F",
     nhc: false,
@@ -725,7 +733,7 @@ const MEMBERS = [
   },
   {
     name: "Helen Walker",
-    grade: "2",
+    grade: "2A",
     gender: "F",
     nhc: true,
     nxd: false,
@@ -839,6 +847,14 @@ const MEMBERS = [
     name: "Jay Weatherill",
     grade: "2",
     gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Jenny Plint",
+    grade: "2",
+    gender: "F",
     nhc: false,
     nxd: false,
     plusMinus: ""
@@ -1068,6 +1084,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Khris Rooneem",
+    grade: "3",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Kim Briedahl",
     grade: "2A",
     gender: "F",
@@ -1126,6 +1150,14 @@ const MEMBERS = [
   {
     name: "Liz Peterson",
     grade: "2",
+    gender: "F",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
+    name: "Lizzie Prendiville",
+    grade: "2B",
     gender: "F",
     nhc: false,
     nxd: false,
@@ -1276,6 +1308,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Mike Rickard",
+    grade: "3",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Moira Dobson",
     grade: "2A",
     gender: "F",
@@ -1404,6 +1444,14 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
+    name: "Peter White",
+    grade: "2B",
+    gender: "M",
+    nhc: false,
+    nxd: false,
+    plusMinus: ""
+  },
+  {
     name: "Phil Tissiman",
     grade: "2A",
     gender: "M",
@@ -1445,7 +1493,7 @@ const MEMBERS = [
   },
   {
     name: "Rahil Ajmera",
-    grade: "2B",
+    grade: "2A",
     gender: "M",
     nhc: false,
     nxd: false,
