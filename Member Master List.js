@@ -188,14 +188,6 @@ const MEMBERS = [
     plusMinus: "+"
   },
   {
-    name: "Belinda Leclezio",
-    grade: "2B",
-    gender: "F",
-    nhc: false,
-    nxd: false,
-    plusMinus: ""
-  },
-  {
     name: "Ben Loader",
     grade: "2",
     gender: "M",
@@ -461,14 +453,6 @@ const MEMBERS = [
   },
   {
     name: "Craig Herkes",
-    grade: "2",
-    gender: "M",
-    nhc: false,
-    nxd: false,
-    plusMinus: ""
-  },
-  {
-    name: "Craig M",
     grade: "2",
     gender: "M",
     nhc: false,
@@ -1164,7 +1148,7 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
-    name: "Lorrainne Bossie",
+    name: "Lorraine Bossie",
     grade: "2A",
     gender: "F",
     nhc: false,
@@ -1636,7 +1620,7 @@ const MEMBERS = [
     plusMinus: ""
   },
   {
-    name: "Sadna Maroo",
+    name: "Sadhna Maroo",
     grade: "2A",
     gender: "F",
     nhc: true,
