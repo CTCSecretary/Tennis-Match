@@ -210,7 +210,7 @@ const MEMBERS = [
   {name: "Ruth Maitland", grade: "2B", gender: "F", nhc: false, nxd: false, plusMinus: ""},
   {name: "Ryan Binedell", grade: "2", gender: "M", nhc: false, nxd: false, plusMinus: ""},
   {name: "Sadhna Maroo", grade: "2A", gender: "F", nhc: true, nxd: false, plusMinus: ""},
-  {name: "Sallee Eyres", grade: "2", gender: "F", nhc: false, nxd: false, plusMinus: ""},
+  {name: "Sallee Eyres", grade: "2A", gender: "F", nhc: false, nxd: false, plusMinus: ""},
   {name: "Sally Rossen", grade: "2B", gender: "F", nhc: false, nxd: false, plusMinus: ""},
   {name: "Sarah Stretton", grade: "2", gender: "F", nhc: false, nxd: false, plusMinus: ""},
   {name: "Shane Bannister-Jones", grade: "2A", gender: "F", nhc: false, nxd: false, plusMinus: "+"},
