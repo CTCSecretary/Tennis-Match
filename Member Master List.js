@@ -1,12 +1,13 @@
 // Tennis Club Member Master List
-// Generated on: 23/11/2025, 15:21:18
-// Total Members: 239
+// Generated on: 29/11/2025, 17:09:34
+// Total Members: 243
 
 const MEMBERS = [
   {name: "Adrian Taylor", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
   {name: "Agathe Leroux", grade: "3", gender: "F", nhc: false, plusMinus: ""},
   {name: "Aiden Nguyen", grade: "2A", gender: "M", nhc: false, plusMinus: ""},
   {name: "Alex Flynn", grade: "2A", gender: "M", nhc: false, plusMinus: ""},
+  {name: "Alice ", grade: "2", gender: "F", nhc: false, plusMinus: ""},
   {name: "Alicia Roe", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
   {name: "Allan Blakeney", grade: "2", gender: "M", nhc: false, plusMinus: "+"},
   {name: "Allan Wall", grade: "2A", gender: "M", nhc: false, plusMinus: "-"},
@@ -48,6 +49,7 @@ const MEMBERS = [
   {name: "Caroline Werner", grade: "2B", gender: "F", nhc: false, plusMinus: ""},
   {name: "Carolyn Hogan", grade: "3", gender: "F", nhc: false, plusMinus: "+"},
   {name: "Cathy Harper", grade: "2", gender: "F", nhc: false, plusMinus: ""},
+  {name: "Charlotte", grade: "2B", gender: "F", nhc: false, plusMinus: ""},
   {name: "Cheryl Hoskin", grade: "2A", gender: "F", nhc: true, plusMinus: "-"},
   {name: "Chris Kruk", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Chris McSweeney", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
@@ -121,7 +123,7 @@ const MEMBERS = [
   {name: "John Stockwell", grade: "2B", gender: "M", nhc: true, plusMinus: "+"},
   {name: "Jonathan Marlow", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Josh Pitt", grade: "2A", gender: "M", nhc: false, plusMinus: ""},
-  {name: "Joy Gilmore", grade: "2B", gender: "F", nhc: false, plusMinus: "+"},
+  {name: "Joy Gilmour", grade: "2B", gender: "F", nhc: false, plusMinus: "+"},
   {name: "Jude James", grade: "2", gender: "F", nhc: false, plusMinus: ""},
   {name: "Judi Coffey", grade: "2B", gender: "F", nhc: false, plusMinus: ""},
   {name: "Judy Curran", grade: "3", gender: "F", nhc: true, plusMinus: ""},
@@ -153,6 +155,7 @@ const MEMBERS = [
   {name: "Lorraine Bossie", grade: "2A", gender: "F", nhc: false, plusMinus: "+"},
   {name: "Lyne Woodland", grade: "2", gender: "F", nhc: false, plusMinus: ""},
   {name: "Marco Clay", grade: "2A", gender: "M", nhc: false, plusMinus: ""},
+  {name: "Maria", grade: "2B", gender: "F", nhc: false, plusMinus: ""},
   {name: "Mark Lewis", grade: "2", gender: "M", nhc: false, plusMinus: "+"},
   {name: "Mark Waring", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Mary Sullivan", grade: "2A", gender: "F", nhc: false, plusMinus: "+"},
@@ -200,6 +203,7 @@ const MEMBERS = [
   {name: "Richard Drake-Brockman", grade: "2A", gender: "M", nhc: true, plusMinus: ""},
   {name: "Richard Elsey", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
   {name: "Richard Lee", grade: "2B", gender: "M", nhc: false, plusMinus: "-"},
+  {name: "Richard Morris", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
   {name: "Rick Bretnall", grade: "2", gender: "M", nhc: false, plusMinus: "-"},
   {name: "Rick Cullen", grade: "2A", gender: "M", nhc: false, plusMinus: "-"},
   {name: "Rob Wilde", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
