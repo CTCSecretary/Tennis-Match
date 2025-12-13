@@ -12,7 +12,7 @@ const MEMBERS = [
   {name: "Allan Wall", grade: "2A", gender: "M", nhc: false, plusMinus: "-"},
   {name: "Alwyn Vear", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
   {name: "Amanda McGregor", grade: "2B", gender: "F", nhc: false, plusMinus: "+"},
-  {name: "Amy Oen", grade: "2", gender: "F", nhc: false, plusMinus: ""},
+  {name: "Amy Oen", grade: "2", gender: "F", nhc: false, plusMinus: "-"},
   {name: "Andrew Davey", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Andrew Gaby", grade: "2", gender: "M", nhc: false, plusMinus: "-"},
   {name: "Andrew Walsh", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
