@@ -1,6 +1,6 @@
 // Tennis Club Member Master List
 // Generated on: 08/12/2025, 15:08:59
-// Total Members: 275
+// Total Members: 273
 
 const MEMBERS = [
   {name: "Adrian Taylor", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
@@ -149,7 +149,6 @@ const MEMBERS = [
   {name: "Karen Parfitt", grade: "2", gender: "F", nhc: false, plusMinus: ""},
   {name: "Karen Simmer", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
   {name: "Karin Hoal", grade: "2B", gender: "F", nhc: false, plusMinus: ""},
-  {name: "Kate Mahon", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
   {name: "Katrina Chisholm", grade: "2", gender: "F", nhc: false, plusMinus: ""},
   {name: "Katrina Downes", grade: "2B", gender: "F", nhc: false, plusMinus: ""},
   {name: "Kay Hanlon", grade: "3A", gender: "F", nhc: false, plusMinus: ""},
@@ -159,7 +158,6 @@ const MEMBERS = [
   {name: "Ken Hogan", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
   {name: "Kevin Chatfield", grade: "3", gender: "M", nhc: false, plusMinus: ""},
   {name: "Kim Breidahl", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
-  {name: "Kim Briedahl", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
   {name: "Kim Morgan", grade: "2B", gender: "F", nhc: false, plusMinus: ""},
   {name: "Kirstin Prendiville", grade: "2", gender: "F", nhc: false, plusMinus: ""},
   {name: "Kris Rooneem", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
