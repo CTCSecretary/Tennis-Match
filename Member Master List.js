@@ -201,7 +201,7 @@ const MEMBERS = [
   {name: "Pam Morley", grade: "2A", gender: "F", nhc: false, plusMinus: "-"},
   {name: "Patrick Prendiville", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Paul Carter", grade: "2A", gender: "M", nhc: false, plusMinus: "-"},
-  {name: "Paul Oen", grade: "2B", gender: "M", nhc: false, plusMinus: "+"},
+  {name: "Paul Oen", grade: "2B", gender: "M", nhc: false, plusMinus: "-"},
   {name: "Paul Southam", grade: "3", gender: "M", nhc: false, plusMinus: "+"},
   {name: "Peter Blake", grade: "2B", gender: "M", nhc: false, plusMinus: "-"},
   {name: "Peter Cartwright", grade: "2", gender: "M", nhc: false, plusMinus: ""},
