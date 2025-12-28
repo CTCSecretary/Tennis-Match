@@ -1,6 +1,6 @@
 // Tennis Club Member Master List
 // Generated on: 22/12/2025, 09:35:04
-// Total Members: 269
+// Total Members: 270
 
 const MEMBERS = [
   {name: "Adrian Taylor", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
@@ -45,6 +45,7 @@ const MEMBERS = [
   {name: "Brian Scott", grade: "2A", gender: "M", nhc: false, plusMinus: ""},
   {name: "Brian Sova", grade: "3A", gender: "M", nhc: false, plusMinus: ""},
   {name: "Bruce Gregory", grade: "2", gender: "M", nhc: false, plusMinus: "-"},
+  {name: "Bruce Hopper", grade: "2A", gender: "M", nhc: false, plusMinus: "-"},
   {name: "Bruce Michelly", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
   {name: "Cam McGreggor", grade: "2A", gender: "M", nhc: false, plusMinus: ""},
   {name: "Capucine Flipo", grade: "2", gender: "F", nhc: false, plusMinus: ""},
@@ -152,7 +153,7 @@ const MEMBERS = [
   {name: "Kay Hanlon", grade: "3A", gender: "F", nhc: false, plusMinus: ""},
   {name: "Ken Adam", grade: "2A", gender: "M", nhc: false, plusMinus: ""},
   {name: "Ken Everett", grade: "2", gender: "M", nhc: false, plusMinus: "+"},
-  {name: "Ken Gotfried", grade: "2A", gender: "M", nhc: true, plusMinus: "-"},
+  {name: "Ken Gotfried", grade: "2A", gender: "M", nhc: true, plusMinus: ""},
   {name: "Ken Hogan", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
   {name: "Kevin Chatfield", grade: "3", gender: "M", nhc: false, plusMinus: ""},
   {name: "Kim Breidahl", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
@@ -175,6 +176,7 @@ const MEMBERS = [
   {name: "Mark Nelson", grade: "3", gender: "M", nhc: false, plusMinus: ""},
   {name: "Mark Waring", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Mary Sullivan", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
+  {name: "Marisa Schonwolf", grade: "2", gender: "F", nhc: false, plusMinus: ""},
   {name: "Matt MacFarlane", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
   {name: "Matt Schlapfer", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Matthew Haynes", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
