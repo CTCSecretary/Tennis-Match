@@ -176,7 +176,7 @@ const MEMBERS = [
   {name: "Mark Nelson", grade: "3", gender: "M", nhc: false, plusMinus: ""},
   {name: "Mark Waring", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Mary Sullivan", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
-  {name: "Marisa Schonwolf", grade: "2", gender: "F", nhc: false, plusMinus: ""},
+  {name: "Marisa Schonwolf", grade: "2A", gender: "F", nhc: false, plusMinus: ""},
   {name: "Matt MacFarlane", grade: "2A", gender: "M", nhc: false, plusMinus: "+"},
   {name: "Matt Schlapfer", grade: "2", gender: "M", nhc: false, plusMinus: ""},
   {name: "Matthew Haynes", grade: "2B", gender: "M", nhc: false, plusMinus: ""},
